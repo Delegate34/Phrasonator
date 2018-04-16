@@ -1,8 +1,22 @@
+:-encoding(utf8).
+
 phrase(W) :-
-  setof(s(X,Y,Z),s(X,Y,Z),L),random_member(W,L).
+  set_prolog_stack(global, limit(100 000 000 000)),
+  findall(X,s(X,Y,Z),L),
+  random_member(W,L).
+  % open('liste.txt',write,OS),
+  % loop_through_list(L,OS),
+  % close(OS).
+
+% loop_through_list([],OS).
+% loop_through_list([Head|Tail],OS) :-
+%     write(OS,Head),
+%     write(OS,'\n'),
+%     loop_through_list(Tail,OS).
 
 s(L,P,Q):-
   sn(SN,P,X,N,G,H), sv(SV,X,Q,N,H,Ho),\+nth0(Z, SV, SN),append(SN,SV,L).
+  % ,atomic_list_concat(L,' ',A).
 
 sn([DET,NOM],P,Q,N,G,H):-
 det(DET,P,X,N,G), n(NOM,X,Y,N,G,H).
@@ -21,8 +35,6 @@ det(tous,P,Q,plur,masc).
 det(toutes,P,Q,plur,fem).
 det(chaque,P,Q,sing,masc).
 det(chaque,P,Q,sing,fem).
-det(chaque,P,Q,plur,masc).
-det(chaque,P,Q,plur,fem).
 det(quelque,P,Q,sing,masc).
 det(quelques,P,Q,plur,masc).
 det(quelque,P,Q,sing,fem).
@@ -32,56 +44,56 @@ det(certaine,P,Q,sing,fem).
 det(certains,P,Q,plur,masc).
 det(certaines,P,Q,plur,fem).
 
-vt(abat,P,Q,sing,hum,X).
-vt(abattent,P,Q,plur,hum,X).
-vt(abandonne,P,Q,sing,hum,X).
-vt(abandonnent,P,Q,plur,hum,X).
-vt(abaisse,P,Q,sing,hum,nhum).
-vt(abaissent,P,Q,plur,hum,nhum).
-vt(accelere,P,Q,sing,hum,nhum).
-vt(accelerent,P,Q,plur,hum,nhum).
-vt(accepte,P,Q,sing,hum,X).
-vt(acceptent,P,Q,plur,hum,X).
-vt(accomplit,P,Q,sing,X,nhum).
-vt(accomplissent,P,Q,plur,X,nhum).
-vt(acquiert,P,Q,sing,hum,nhum).
-vt(acquierent,P,Q,plur,hum,nhum).
-vt(adapte,P,Q,sing,hum,nhum).
-vt(adaptent,P,Q,plur,hum,nhum).
-vt(administre,P,Q,sing,hum,nhum).
-vt(administrent,P,Q,plur,hum,nhum).
-vt(admire,P,Q,sing,hum,X).
-vt(admirent,P,Q,plur,hum,X).
-vt(adore,P,Q,sing,hum,X).
-vt(adorent,P,Q,plur,hum,X).
-vt(affaiblit,P,Q,sing,hum,X).
-vt(affaiblissent,P,Q,plur,hum,X).
-vt(affiche,P,Q,sing,X,X).
-vt(affichent,P,Q,plur,X,X).
-vt(affirme,P,Q,sing,hum,nhum).
-vt(affirment,P,Q,plur,hum,nhum).
-vt(agite,P,Q,sing,hum,X).
-vt(agitent,P,Q,plur,hum,X).
-vt(affronte,P,Q,sing,hum,hum).
-vt(affrontent,P,Q,plur,hum,hum).
-vt(agrippe,P,Q,sing,hum,X).
-vt(agrippent,P,Q,plur,hum,X).
-vt(ajoute,P,Q,sing,hum,nhum).
-vt(ajoutent,P,Q,plur,hum,nhum).
-vt(aime,P,Q,sing,hum,X).
-vt(aiment,P,Q,plur,hum,X).
-vt(agree,P,Q,sing,hum,nhum).
-vt(agreent,P,Q,plur,hum,nhum).
-vt(allume,P,Q,sing,hum,nhum).
-vt(allument,P,Q,plur,hum,nhum).
-vt(amasse,P,Q,sing,hum,nhum).
-vt(amassent,P,Q,plur,hum,nhum).
-vt(ameliore,P,Q,sing,hum,nhum).
-vt(ameliorent,P,Q,plur,hum,nhum).
-vt(amene,P,Q,sing,hum,X).
-vt(amenent,P,Q,plur,hum,X).
-vt(anime,P,Q,sing,hum,X).
-vt(animent,P,Q,plur,hum,X).
+% vt(abat,P,Q,sing,hum,X).
+% vt(abattent,P,Q,plur,hum,X).
+% vt(abandonne,P,Q,sing,hum,X).
+% vt(abandonnent,P,Q,plur,hum,X).
+% vt(abaisse,P,Q,sing,hum,nhum).
+% vt(abaissent,P,Q,plur,hum,nhum).
+% vt(accelere,P,Q,sing,hum,nhum).
+% vt(accelerent,P,Q,plur,hum,nhum).
+% vt(accepte,P,Q,sing,hum,X).
+% vt(acceptent,P,Q,plur,hum,X).
+% vt(accomplit,P,Q,sing,X,nhum).
+% vt(accomplissent,P,Q,plur,X,nhum).
+% vt(acquiert,P,Q,sing,hum,nhum).
+% vt(acquierent,P,Q,plur,hum,nhum).
+% vt(adapte,P,Q,sing,hum,nhum).
+% vt(adaptent,P,Q,plur,hum,nhum).
+% vt(administre,P,Q,sing,hum,nhum).
+% vt(administrent,P,Q,plur,hum,nhum).
+% vt(admire,P,Q,sing,hum,X).
+% vt(admirent,P,Q,plur,hum,X).
+% vt(adore,P,Q,sing,hum,X).
+% vt(adorent,P,Q,plur,hum,X).
+% vt(affaiblit,P,Q,sing,hum,X).
+% vt(affaiblissent,P,Q,plur,hum,X).
+% vt(affiche,P,Q,sing,X,X).
+% vt(affichent,P,Q,plur,X,X).
+% vt(affirme,P,Q,sing,hum,nhum).
+% vt(affirment,P,Q,plur,hum,nhum).
+% vt(agite,P,Q,sing,hum,X).
+% vt(agitent,P,Q,plur,hum,X).
+% vt(affronte,P,Q,sing,hum,hum).
+% vt(affrontent,P,Q,plur,hum,hum).
+% vt(agrippe,P,Q,sing,hum,X).
+% vt(agrippent,P,Q,plur,hum,X).
+% vt(ajoute,P,Q,sing,hum,nhum).
+% vt(ajoutent,P,Q,plur,hum,nhum).
+% vt(aime,P,Q,sing,hum,X).
+% vt(aiment,P,Q,plur,hum,X).
+% vt(agree,P,Q,sing,hum,nhum).
+% vt(agreent,P,Q,plur,hum,nhum).
+% vt(allume,P,Q,sing,hum,nhum).
+% vt(allument,P,Q,plur,hum,nhum).
+% vt(amasse,P,Q,sing,hum,nhum).
+% vt(amassent,P,Q,plur,hum,nhum).
+% vt(ameliore,P,Q,sing,hum,nhum).
+% vt(ameliorent,P,Q,plur,hum,nhum).
+% vt(amene,P,Q,sing,hum,X).
+% vt(amenent,P,Q,plur,hum,X).
+% vt(anime,P,Q,sing,hum,X).
+% vt(animent,P,Q,plur,hum,X).
 vt(amuse,P,Q,sing,hum,nhum).
 vt(amusent,P,Q,plur,hum,nhum).
 vt(amplifie,P,Q,sing,hum,nhum).
@@ -156,1980 +168,813 @@ vi(arrivent,P,Q,plur,hum).
 vi(avance,P,Q,sing,X).
 vi(avancent,P,Q,plur,X).
 
-n(sport,P,Q,sing,masc,hum).
-n(sports,P,Q,plur,masc,hum).
-n(rivière,P,Q,sing,fem,nhum).
-n(combinaison,P,Q,sing,fem,nhum).
-n(traversée,P,Q,sing,fem,hum).
+n(sport,P,Q,sing,masc,nhum).
+n(sports,P,Q,plur,masc,nhum).
+n(traversée,P,Q,sing,fem,nhum).
 n(athlétisme,P,Q,sing,masc,nhum).
-n(battue,P,Q,sing,fem,nhum).
-n(rappel,P,Q,sing,masc,hum).
 n(jiujitsu,P,Q,sing,masc,nhum).
-n(brasseur,P,Q,sing,masc,nhum).
 n(snowboard,P,Q,sing,masc,nhum).
 n(taihojutsu,P,Q,sing,masc,nhum).
-n(shinty,P,Q,sing,masc,nhum).
-n(volata,P,Q,sing,fem,nhum).
-n(tchoukball,P,Q,sing,masc,nhum).
 n(wakeboard,P,Q,sing,masc,nhum).
 n(roulade,P,Q,sing,fem,nhum).
-n(fandango,P,Q,sing,masc,nhum).
-n(plaisirs,P,Q,plur,masc,nhum).
 n(javelot,P,Q,sing,masc,nhum).
-n(barrage,P,Q,sing,masc,nhum).
-n(skieur,P,Q,sing,masc,nhum).
-n(coulé,P,Q,sing,masc,hum).
-n(boulisme,P,Q,sing,masc,nhum).
-n(boumerang,P,Q,sing,masc,nhum).
-n(têtière,P,Q,sing,fem,nhum).
-n(assaut,P,Q,sing,masc,nhum).
-n(pivotement,P,Q,sing,masc,nhum).
-n(contre-offensive,P,Q,sing,fem,nhum).
+n(skieur,P,Q,sing,masc,hum).
+n(boomerang,P,Q,sing,masc,nhum).
+% n(contre-offensive,P,Q,sing,fem,nhum).
 n(entorse,P,Q,sing,fem,nhum).
-n(water-polo,P,Q,sing,masc,nhum).
+% n(water-polo,P,Q,sing,masc,nhum).
 n(foulée,P,Q,sing,fem,nhum).
-n(piolet,P,Q,sing,masc,nhum).
-n(concurrent,P,Q,sing,masc,nhum).
-n(sulky,P,Q,sing,masc,nhum).
+n(concurrent,P,Q,sing,masc,hum).
 n(remontée,P,Q,sing,fem,nhum).
 n(volée,P,Q,sing,fem,nhum).
-n(divertissement,P,Q,sing,masc,nhum).
-n(senior,P,Q,sing,fem,nhum).
-n(mils,P,Q,plur,masc,nhum).
-n(nage,P,Q,sing,fem,nhum).
-n(pendule,P,Q,sing,fem,nhum).
-n(vague,P,Q,sing,fem,nhum).
-n(tennis,P,Q,sing,fem,nhum).
-n(abandon,P,Q,sing,masc,nhum).
-n(outsider,P,Q,sing,masc,nhum).
-n(fleuret,P,Q,sing,masc,nhum).
-n(pugilat,P,Q,sing,masc,nhum).
-n(supériorité,P,Q,sing,fem,nhum).
-n(sponsor,P,Q,sing,fem,nhum).
-n(piscine,P,Q,sing,fem,nhum).
-n(ciseau,P,Q,sing,masc,nhum).
-n(patineur,P,Q,sing,masc,nhum).
-n(dégagé,P,Q,sing,masc,nhum).
-n(aquagym,P,Q,sing,fem,nhum).
-n(lendit,P,Q,sing,masc,nhum).
-n(lice,P,Q,sing,fem,nhum).
-n(prise,P,Q,sing,fem,nhum).
-n(pêche,P,Q,sing,fem,nhum).
-n(épéisme,P,Q,sing,masc,nhum).
-n(dérapage,P,Q,sing,masc,nhum).
-n(galipette,P,Q,sing,fem,nhum).
-n(frustration,P,Q,sing,fem,hum).
-n(échappée,P,Q,sing,fem,nhum).
-n(tricheur,P,Q,sing,masc,nhum).
-n(marathon,P,Q,sing,masc,nhum).
-n(plaquette,P,Q,sing,fem,nhum).
-n(cage,P,Q,sing,fem,hum).
-n(relayeur,P,Q,sing,masc,nhum).
-n(molette,P,Q,sing,fem,nhum).
-n(arbitre,P,Q,sing,masc,hum).
-n(manchette,P,Q,sing,fem,nhum).
-n(goal,P,Q,sing,masc,nhum).
-n(moto,P,Q,sing,fem,nhum).
-n(bicyclette,P,Q,sing,fem,nhum).
-n(supporterisme,P,Q,sing,masc,nhum).
-n(méténolone,P,Q,sing,fem,nhum).
-n(footballer,P,Q,sing,masc,hum).
-n(cob,P,Q,sing,masc,hum).
-n(fortraiture,P,Q,sing,fem,nhum).
-n(dévissé,P,Q,sing,masc,nhum).
-n(chambrière,P,Q,sing,fem,nhum).
-n(pistolet,P,Q,sing,masc,nhum).
-n(osselet,P,Q,sing,masc,hum).
-n(tambourin,P,Q,sing,masc,nhum).
-n(turfiste,P,Q,sing,fem,nhum).
-n(haltérophile,P,Q,sing,fem,nhum).
-n(motoneige,P,Q,sing,fem,nhum).
-n(jogging,P,Q,sing,masc,hum).
-n(rueur,P,Q,sing,fem,hum).
-n(trick,P,Q,sing,masc,nhum).
-n(mécénat,P,Q,sing,masc,nhum).
-n(pangaré,P,Q,sing,masc,nhum).
-n(obstacle,P,Q,sing,masc,nhum).
-n(pitonnage,P,Q,sing,masc,nhum).
-n(goussaut,P,Q,sing,masc,hum).
-n(verrou,P,Q,sing,masc,nhum).
-n(régate,P,Q,sing,fem,nhum).
-n(balle,P,Q,sing,masc,nhum).
-n(haut-le-corps,P,Q,plur,masc,nhum).
-n(ballon,P,Q,sing,masc,nhum).
-n(sherpa,P,Q,sing,masc,hum).
-n(gym,P,Q,sing,fem,nhum).
-n(poutre,P,Q,sing,fem,nhum).
-n(steeple-chase,P,Q,sing,masc,nhum).
-n(softball,P,Q,sing,masc,nhum).
-n(maitre-nageur,P,Q,sing,masc,nhum).
-n(chronométrage,P,Q,sing,masc,nhum).
-n(chute,P,Q,sing,fem,nhum).
-n(percée,P,Q,sing,fem,nhum).
-n(hooligan,P,Q,sing,masc,nhum).
-n(stock-car,P,Q,sing,masc,nhum).
-n(viandard,P,Q,sing,masc,hum).
-n(déchausser,P,Q,sing,masc,nhum).
-n(amusement,P,Q,sing,masc,nhum).
-n(tension,P,Q,sing,fem,nhum).
-n(vareuse,P,Q,sing,fem,nhum).
-n(étalonnier,P,Q,sing,fem,nhum).
-n(plongeon,P,Q,sing,masc,hum).
-n(ballet,P,Q,sing,masc,nhum).
-n(hippisme,P,Q,sing,masc,nhum).
-n(cible,P,Q,sing,fem,hum).
-n(mouche,P,Q,sing,fem,hum).
-n(reprise,P,Q,sing,fem,nhum).
-n(mentonnière,P,Q,sing,fem,nhum).
-n(show-biz,P,Q,sing,fem,nhum).
-n(caramel,P,Q,sing,masc,nhum).
-n(catch,P,Q,sing,masc,hum).
-n(pollution,P,Q,sing,fem,nhum).
-n(merlu,P,Q,sing,masc,hum).
-n(vélivole,P,Q,sing,fem,nhum).
-n(feinte,P,Q,sing,fem,nhum).
-n(libériste,P,Q,sing,masc,hum).
-n(cirque,P,Q,sing,masc,hum).
-n(interviewer,P,Q,sing,masc,nhum).
-n(rounders,P,Q,sing,masc,nhum).
-n(pince-nez,P,Q,plur,masc,nhum).
-n(basket,P,Q,sing,masc,nhum).
-n(courses,P,Q,plur,fem,nhum).
-n(mitaine,P,Q,sing,fem,hum).
-n(basket,P,Q,sing,fem,nhum).
-n(moyeu,P,Q,sing,masc,nhum).
-n(kayac,P,Q,sing,masc,nhum).
-n(batte,P,Q,sing,fem,nhum).
-n(vista,P,Q,sing,masc,hum).
-n(manche,P,Q,sing,fem,nhum).
-n(bidet,P,Q,sing,masc,hum).
-n(navigateur,P,Q,sing,masc,nhum).
-n(dopamine,P,Q,sing,fem,nhum).
-n(spectacle,P,Q,sing,masc,nhum).
-n(golloter,P,Q,sing,masc,hum).
-n(crawleur,P,Q,sing,masc,nhum).
-n(rochassier,P,Q,sing,masc,nhum).
-n(coéquipier,P,Q,sing,masc,nhum).
-n(haies,P,Q,plur,fem,nhum).
-n(recordman,P,Q,sing,masc,nhum).
-n(demi-fond,P,Q,sing,masc,nhum).
-n(putter,P,Q,sing,masc,nhum).
-n(éliminatoire,P,Q,sing,fem,nhum).
-n(délassement,P,Q,sing,masc,nhum).
-n(selles,P,Q,plur,fem,nhum).
-n(flowboard,P,Q,sing,masc,nhum).
-n(favori,P,Q,sing,masc,nhum).
-n(télé,P,Q,sing,fem,nhum).
-n(schelem,P,Q,sing,masc,nhum).
-n(cogneur,P,Q,sing,masc,hum).
-n(lugeur,P,Q,sing,masc,nhum).
-n(club,P,Q,sing,masc,nhum).
-n(taekwendo,P,Q,sing,masc,nhum).
-n(hippique,P,Q,sing,masc,hum).
-n(prolongation,P,Q,sing,fem,nhum).
-n(trapèze,P,Q,sing,masc,nhum).
-n(baudrier,P,Q,sing,masc,hum).
-n(base-ball,P,Q,sing,masc,nhum).
-n(casaque,P,Q,sing,fem,nhum).
-n(sabre,P,Q,sing,masc,nhum).
-n(brasse,P,Q,sing,fem,nhum).
-n(marqueuse,P,Q,sing,fem,nhum).
-n(vélodrome,P,Q,sing,masc,nhum).
-n(paddock,P,Q,sing,masc,nhum).
-n(canoéiste,P,Q,sing,fem,nhum).
-n(baudruche,P,Q,sing,fem,nhum).
-n(cyclisme,P,Q,sing,masc,nhum).
-n(chopper,P,Q,sing,masc,nhum).
-n(pitonner,P,Q,sing,masc,nhum).
-n(transpiration,P,Q,sing,fem,hum).
-n(enduro,P,Q,sing,masc,nhum).
-n(sueur,P,Q,sing,fem,nhum).
-n(tournoi,P,Q,sing,masc,nhum).
-n(professionnalisme,P,Q,sing,masc,nhum).
-n(jodhpurs,P,Q,plur,masc,nhum).
-n(faute,P,Q,sing,fem,nhum).
-n(pirouette,P,Q,sing,fem,nhum).
-n(dégagement,P,Q,sing,masc,nhum).
-n(médecine-ball,P,Q,sing,masc,nhum).
-n(ganterie,P,Q,sing,fem,nhum).
-n(amaigrissement,P,Q,sing,masc,nhum).
-n(gantier,P,Q,sing,masc,nhum).
+% n(divertissement,P,Q,sing,masc,nhum).
+% n(seniors,P,Q,plur,fem,hum).
+% n(nage,P,Q,sing,fem,nhum).
+% n(vague,P,Q,sing,fem,nhum).
+% n(tennis,P,Q,sing,fem,nhum).
+% n(abandon,P,Q,sing,masc,nhum).
+% n(outsider,P,Q,sing,masc,hum).
+% n(supériorité,P,Q,sing,fem,nhum).
+% n(sponsor,P,Q,sing,fem,nhum).
+% n(piscine,P,Q,sing,fem,nhum).
+% n(patineur,P,Q,sing,masc,hum).
+% n(aquagym,P,Q,sing,fem,nhum).
+% n(prise,P,Q,sing,fem,nhum).
+% n(pêche,P,Q,sing,fem,nhum).
+% n(épéisme,P,Q,sing,masc,nhum).
+% n(dérapage,P,Q,sing,masc,nhum).
+% n(galipette,P,Q,sing,fem,nhum).
+% n(échappée,P,Q,sing,fem,nhum).
+% n(tricheur,P,Q,sing,masc,hum).
+% n(marathon,P,Q,sing,masc,nhum).
+% n(plaquette,P,Q,sing,fem,nhum).
+% n(cage,P,Q,sing,fem,hum).
+% n(relayeur,P,Q,sing,masc,hum).
+% n(arbitre,P,Q,sing,masc,hum).
+% n(manchette,P,Q,sing,fem,nhum).
+% n(goal,P,Q,sing,masc,nhum).
+% n(moto,P,Q,sing,fem,nhum).
+% n(bicyclette,P,Q,sing,fem,nhum).
+% n(footballer,P,Q,sing,masc,hum).
+% n(dévissé,P,Q,sing,masc,nhum).
+% n(pistolet,P,Q,sing,masc,nhum).
+% n(haltérophile,P,Q,sing,fem,hum).
+% n(motoneige,P,Q,sing,fem,nhum).
+% n(jogging,P,Q,sing,masc,nhum).
+% n(trick,P,Q,sing,masc,nhum).
+% n(obstacle,P,Q,sing,masc,nhum).
+% n(régate,P,Q,sing,fem,nhum).
+% n(balle,P,Q,sing,masc,nhum).
+% n(ballon,P,Q,sing,masc,nhum).
+% n(gym,P,Q,sing,fem,nhum).
+% n(poutre,P,Q,sing,fem,nhum).
+% n(softball,P,Q,sing,masc,nhum).
+% % n(maitre-nageur,P,Q,sing,masc,hum).
+% n(chronométrage,P,Q,sing,masc,nhum).
+% n(chute,P,Q,sing,fem,nhum).
+% n(percée,P,Q,sing,fem,nhum).
+% n(hooligan,P,Q,sing,masc,hum).
+% n(tension,P,Q,sing,fem,nhum).
+% n(plongeon,P,Q,sing,masc,nhum).
+% n(ballet,P,Q,sing,masc,nhum).
+% n(cible,P,Q,sing,fem,nhum).
+% n(catch,P,Q,sing,masc,nhum).
+% n(feinte,P,Q,sing,fem,nhum).
+% n(intervieweur,P,Q,sing,masc,hum).
+% % n(pince-nez,P,Q,plur,masc,nhum).
+% n(basket,P,Q,sing,masc,nhum).
+% n(courses,P,Q,plur,fem,nhum).
+% n(mitaine,P,Q,sing,fem,nhum).
+% n(basket,P,Q,sing,fem,nhum).
+% n(kayac,P,Q,sing,masc,nhum).
+% n(batte,P,Q,sing,fem,nhum).
+% n(vista,P,Q,sing,fem,nhum).
+% n(manche,P,Q,sing,fem,nhum).
+% n(navigateur,P,Q,sing,masc,hum).
+% n(spectacle,P,Q,sing,masc,nhum).
+% n(crawleur,P,Q,sing,masc,hum).
+% n(coéquipier,P,Q,sing,masc,hum).
+% n(haies,P,Q,plur,fem,nhum).
+% n(recordman,P,Q,sing,masc,hum).
+% % n(demi-fond,P,Q,sing,masc,nhum).
+% n(éliminatoire,P,Q,sing,fem,nhum).
+% n(selles,P,Q,plur,fem,nhum).
+% n(favori,P,Q,sing,masc,nhum).
+% n(télé,P,Q,sing,fem,nhum).
+% n(cogneur,P,Q,sing,masc,hum).
+% n(club,P,Q,sing,masc,nhum).
+% n(taekwendo,P,Q,sing,masc,nhum).
+% n(hippique,P,Q,sing,masc,nhum).
+% n(prolongation,P,Q,sing,fem,nhum).
+% n(trapèze,P,Q,sing,masc,nhum).
+% n(baudrier,P,Q,sing,masc,nhum).
+% % n(base-ball,P,Q,sing,masc,nhum).
+% n(sabre,P,Q,sing,masc,nhum).
+% n(brasse,P,Q,sing,fem,nhum).
+% n(marqueuse,P,Q,sing,fem,hum).
+% n(vélodrome,P,Q,sing,masc,nhum).
+% n(canoéiste,P,Q,sing,fem,nhum).
+% n(baudruche,P,Q,sing,fem,nhum).
+% n(cyclisme,P,Q,sing,masc,nhum).
+% n(transpiration,P,Q,sing,fem,nhum).
+% n(sueur,P,Q,sing,fem,nhum).
+% n(tournoi,P,Q,sing,masc,nhum).
+% n(professionnalisme,P,Q,sing,masc,nhum).
+% n(faute,P,Q,sing,fem,nhum).
+% n(pirouette,P,Q,sing,fem,nhum).
+% n(dégagement,P,Q,sing,masc,nhum).
+% n(médecine-ball,P,Q,sing,masc,nhum).
 n(botte,P,Q,sing,fem,nhum).
 n(danseur,P,Q,sing,masc,hum).
-n(entrechat,P,Q,sing,masc,nhum).
-n(tie-break,P,Q,sing,masc,nhum).
+% n(tie-break,P,Q,sing,masc,nhum).
 n(blason,P,Q,sing,masc,nhum).
 n(gymnaste,P,Q,sing,fem,hum).
-n(volleyeuse,P,Q,sing,fem,nhum).
-n(aubère,P,Q,sing,masc,nhum).
+n(volleyeuse,P,Q,sing,fem,hum).
 n(survêtement,P,Q,sing,masc,nhum).
-n(sambo,P,Q,sing,masc,nhum).
+n(samba,P,Q,sing,fem,nhum).
 n(équitation,P,Q,sing,fem,nhum).
 n(cavalière,P,Q,sing,fem,nhum).
-n(mi-temps,P,Q,sing,fem,nhum).
-n(flot,P,Q,sing,masc,nhum).
-n(protège-tibia,P,Q,sing,masc,hum).
+% n(mi-temps,P,Q,sing,fem,nhum).
+% n(protège-tibia,P,Q,sing,masc,nhum).
 n(aptitude,P,Q,sing,fem,nhum).
 n(brisé,P,Q,sing,masc,nhum).
-n(suspensoir,P,Q,sing,masc,nhum).
 n(cordage,P,Q,sing,masc,nhum).
-n(estrapade,P,Q,sing,fem,nhum).
-n(pisteur,P,Q,sing,masc,nhum).
+n(pisteur,P,Q,sing,masc,hum).
 n(manipulations,P,Q,plur,fem,nhum).
-n(sellerie,P,Q,sing,fem,nhum).
-n(excitation,P,Q,sing,fem,nhum).
 n(clubs,P,Q,plur,masc,nhum).
 n(publicité,P,Q,sing,fem,nhum).
-n(puck,P,Q,sing,masc,nhum).
 n(escapade,P,Q,sing,fem,nhum).
 n(canyonisme,P,Q,sing,masc,nhum).
 n(raid,P,Q,sing,masc,nhum).
 n(cricket,P,Q,sing,masc,nhum).
-n(rosse,P,Q,sing,fem,hum).
-n(shetland,P,Q,sing,masc,hum).
-n(périssoire,P,Q,sing,fem,nhum).
 n(attaque,P,Q,sing,fem,nhum).
-n(tauromachie,P,Q,sing,fem,nhum).
-n(lunule,P,Q,sing,fem,hum).
-n(feud,P,Q,plur,masc,nhum).
-n(salière,P,Q,sing,fem,nhum).
-n(krav-maga,P,Q,sing,masc,nhum).
+% n(krav-maga,P,Q,sing,masc,nhum).
 n(sarbacane,P,Q,sing,fem,nhum).
-n(fair-play,P,Q,sing,masc,nhum).
-n(pointeur,P,Q,sing,masc,nhum).
+% n(fair-play,P,Q,sing,masc,nhum).
+n(pointeur,P,Q,sing,masc,hum).
 n(porteur,P,Q,sing,masc,hum).
-n(hurdler,P,Q,sing,fem,nhum).
-n(trail,P,Q,sing,masc,nhum).
-n(traceur,P,Q,sing,masc,nhum).
+n(traceur,P,Q,sing,masc,hum).
 n(essai,P,Q,sing,masc,nhum).
-n(remonter,P,Q,sing,fem,nhum).
-n(sculpture,P,Q,sing,fem,nhum).
 n(apnée,P,Q,sing,fem,nhum).
 n(jambière,P,Q,sing,fem,nhum).
 n(freestyle,P,Q,sing,masc,nhum).
 n(gain,P,Q,sing,masc,nhum).
 n(sélectionneur,P,Q,sing,masc,nhum).
-n(embouchure,P,Q,sing,fem,nhum).
 n(paddle,P,Q,sing,masc,nhum).
 n(monoski,P,Q,sing,masc,nhum).
-n(challenge,P,Q,sing,masc,hum).
-n(pelote,P,Q,sing,fem,hum).
+n(challenge,P,Q,sing,masc,nhum).
 n(qualificatif,P,Q,sing,masc,nhum).
 n(service,P,Q,sing,masc,nhum).
-n(stalagmite,P,Q,sing,fem,nhum).
-n(coach,P,Q,sing,masc,nhum).
-n(bloqueur,P,Q,sing,masc,nhum).
+n(coach,P,Q,sing,masc,hum).
+n(bloqueur,P,Q,sing,masc,hum).
 n(match,P,Q,sing,masc,nhum).
 n(défaite,P,Q,sing,fem,nhum).
 n(boxe,P,Q,sing,fem,nhum).
-n(piqueur,P,Q,sing,masc,nhum).
-n(finisseur,P,Q,sing,masc,nhum).
+n(finisseur,P,Q,sing,masc,hum).
 n(touchdown,P,Q,sing,masc,nhum).
-n(triathlonien,P,Q,sing,masc,nhum).
+n(triathlonien,P,Q,sing,masc,hum).
 n(quadruplé,P,Q,sing,masc,nhum).
-n(serpentine,P,Q,sing,fem,hum).
-n(chessboxing,P,Q,sing,masc,nhum).
 n(égalité,P,Q,sing,fem,nhum).
 n(quintuplé,P,Q,sing,masc,nhum).
-n(handicaper,P,Q,sing,masc,hum).
+n(handicapé,P,Q,sing,masc,hum).
 n(combat,P,Q,sing,masc,nhum).
 n(kayak,P,Q,sing,masc,nhum).
-n(marcheur,P,Q,sing,masc,nhum).
+n(marcheur,P,Q,sing,masc,hum).
 n(défense,P,Q,sing,fem,nhum).
 n(étriers,P,Q,plur,masc,nhum).
 n(surentraînement,P,Q,sing,masc,nhum).
-n(jiu-jitsu,P,Q,sing,masc,nhum).
-n(prospect,P,Q,sing,masc,nhum).
+% n(jiu-jitsu,P,Q,sing,masc,nhum).
 n(bodysurf,P,Q,sing,masc,nhum).
-n(reining,P,Q,sing,masc,nhum).
 n(marathonien,P,Q,sing,masc,hum).
-n(kitewing,P,Q,sing,masc,nhum).
 n(agilité,P,Q,sing,fem,nhum).
 n(hanche,P,Q,sing,fem,nhum).
 n(riposte,P,Q,sing,fem,nhum).
-n(critérium,P,Q,sing,masc,nhum).
-n(starter,P,Q,sing,masc,nhum).
 n(vélo,P,Q,sing,masc,nhum).
-n(demi-longueur,P,Q,sing,fem,hum).
-n(tamis,P,Q,plur,masc,nhum).
-n(supinateur,P,Q,sing,masc,nhum).
-n(futsal,P,Q,sing,masc,nhum).
+% n(demi-longueur,P,Q,sing,fem,nhum).
 n(mât,P,Q,sing,masc,nhum).
-n(godille,P,Q,sing,fem,nhum).
 n(palmarès,P,Q,plur,masc,nhum).
-n(chassé,P,Q,sing,masc,hum).
 n(plaquage,P,Q,sing,masc,nhum).
 n(ailier,P,Q,sing,masc,hum).
-n(équin,P,Q,sing,masc,hum).
-n(knock-down,P,Q,sing,masc,hum).
+n(équin,P,Q,sing,masc,nhum).
+% n(knock-down,P,Q,sing,masc,nhum).
 n(kendo,P,Q,sing,masc,nhum).
 n(genouillère,P,Q,sing,fem,nhum).
 n(prolongations,P,Q,plur,fem,nhum).
-n(knock-out,P,Q,sing,masc,nhum).
-n(jouet,P,Q,sing,masc,hum).
+% n(knock-out,P,Q,sing,masc,nhum).
+n(jouet,P,Q,sing,masc,nhum).
 n(frappe,P,Q,sing,fem,nhum).
 n(dopage,P,Q,sing,masc,nhum).
-n(athlètes,P,Q,plur,fem,nhum).
-n(fente,P,Q,sing,fem,nhum).
-n(supporteur,P,Q,sing,masc,nhum).
-n(taurine,P,Q,sing,fem,nhum).
+n(athlètes,P,Q,plur,fem,hum).
+n(supporteur,P,Q,sing,masc,hum).
 n(mawashi,P,Q,sing,masc,nhum).
 n(poloïste,P,Q,sing,masc,hum).
 n(saut,P,Q,sing,masc,nhum).
 n(stade,P,Q,sing,masc,nhum).
-n(patinoire,P,Q,sing,fem,hum).
+n(patinoire,P,Q,sing,fem,nhum).
 n(podiums,P,Q,plur,masc,nhum).
-n(skif,P,Q,sing,masc,nhum).
 n(skateboard,P,Q,sing,masc,nhum).
 n(spot,P,Q,sing,masc,nhum).
 n(uppercut,P,Q,sing,masc,nhum).
-n(caracole,P,Q,sing,fem,nhum).
 n(biathlon,P,Q,sing,masc,nhum).
-n(polluants,P,Q,plur,masc,nhum).
-n(piaffer,P,Q,sing,masc,hum).
-n(maillot,P,Q,sing,masc,nhum).
 n(élimination,P,Q,sing,fem,nhum).
-n(pistard,P,Q,sing,masc,nhum).
-n(caparaçon,P,Q,sing,masc,hum).
-n(chilienne,P,Q,sing,fem,nhum).
 n(contre,P,Q,sing,masc,nhum).
 n(terrain,P,Q,sing,masc,nhum).
 n(écurie,P,Q,sing,fem,nhum).
-n(sanshou,P,Q,sing,masc,nhum).
-n(balises,P,Q,sing,masc,nhum).
-n(gugusse,P,Q,sing,masc,nhum).
-n(stiple,P,Q,sing,masc,nhum).
 n(partie,P,Q,sing,fem,nhum).
-n(allègement,P,Q,sing,masc,nhum).
 n(rame,P,Q,sing,fem,nhum).
 n(pointes,P,Q,plur,fem,nhum).
 n(transformation,P,Q,sing,fem,nhum).
-n(badminton,P,Q,sing,masc,hum).
-n(abri,P,Q,sing,masc,nhum).
-n(bat-flanc,P,Q,sing,masc,nhum).
-n(soudoiement,P,Q,sing,masc,nhum).
-n(pompe,P,Q,sing,fem,nhum).
+n(badminton,P,Q,sing,masc,nhum).
 n(internationaux,P,Q,plur,masc,nhum).
 n(échauffement,P,Q,sing,masc,nhum).
-n(racine,P,Q,sing,masc,hum).
 n(crawl,P,Q,sing,masc,nhum).
-n(chausson,P,Q,sing,masc,nhum).
-n(loader,P,Q,sing,masc,nhum).
-n(footbag,P,Q,sing,masc,nhum).
-n(welter,P,Q,sing,masc,nhum).
 n(acrobatie,P,Q,sing,fem,nhum).
 n(talon,P,Q,sing,masc,nhum).
 n(sauts,P,Q,plur,masc,nhum).
-n(ultra-trail,P,Q,sing,masc,nhum).
-n(sandow,P,Q,sing,fem,nhum).
 n(lutte,P,Q,sing,fem,nhum).
 n(frappeur,P,Q,sing,masc,nhum).
-n(toréador,P,Q,sing,masc,nhum).
-n(économie,P,Q,sing,fem,nhum).
-n(traquenard,P,Q,sing,masc,nhum).
+n(toréador,P,Q,sing,masc,hum).
 n(short,P,Q,sing,masc,nhum).
 n(pénalité,P,Q,sing,fem,nhum).
-n(étourneau,P,Q,sing,masc,hum).
-n(leader,P,Q,sing,masc,hum).
-n(attitude,P,Q,sing,fem,nhum).
-n(aficionado,P,Q,sing,masc,nhum).
-n(vétéran,P,Q,sing,masc,hum).
-n(tournante,P,Q,sing,fem,nhum).
 n(clé,P,Q,sing,fem,nhum).
-n(intermittent,P,Q,sing,masc,nhum).
 n(break,P,Q,sing,masc,nhum).
-n(kapo,P,Q,sing,masc,nhum).
-n(soigneur,P,Q,sing,masc,nhum).
+n(soigneur,P,Q,sing,masc,hum).
 n(compétitivité,P,Q,sing,fem,nhum).
-n(dévissage,P,Q,sing,masc,nhum).
-n(exerciseur,P,Q,sing,masc,nhum).
-n(bouchonné,P,Q,sing,fem,nhum).
-n(pétéca,P,Q,sing,fem,nhum).
-n(trois-quarts,P,Q,plur,masc,hum).
-n(triangle,P,Q,sing,masc,nhum).
+% n(trois-quarts,P,Q,plur,masc,hum).
 n(point,P,Q,sing,masc,nhum).
 n(transversale,P,Q,sing,fem,nhum).
-n(bicyclette,P,Q,sing,fem,hum).
-n(assouplissement,P,Q,sing,masc,hum).
+n(bicyclette,P,Q,sing,fem,nhum).
+n(assouplissement,P,Q,sing,masc,nhum).
 n(cheval,P,Q,sing,masc,nhum).
 n(retrait,P,Q,sing,masc,nhum).
-n(trois-six,P,Q,plur,masc,nhum).
-n(éventail,P,Q,sing,masc,nhum).
 n(descente,P,Q,sing,fem,nhum).
-n(trudgeon,P,Q,sing,masc,nhum).
 n(libero,P,Q,sing,masc,hum).
 n(aviron,P,Q,sing,masc,nhum).
-n(percée,P,Q,sing,masc,hum).
+n(percée,P,Q,sing,masc,nhum).
 n(canne,P,Q,sing,fem,nhum).
-n(qualifier,P,Q,sing,masc,nhum).
-n(ball-trap,P,Q,sing,masc,nhum).
-n(super-welter,P,Q,sing,masc,nhum).
+n(qualifié,P,Q,sing,masc,hum).
+% n(ball-trap,P,Q,sing,masc,nhum).
 n(claquage,P,Q,sing,masc,nhum).
-n(montoir,P,Q,sing,masc,nhum).
 n(agitation,P,Q,sing,fem,nhum).
 n(jeu,P,Q,sing,masc,nhum).
-n(go,P,Q,plur,masc,nhum).
 n(quidditch,P,Q,sing,masc,nhum).
-n(pléthysmographie,P,Q,sing,fem,nhum).
 n(footing,P,Q,sing,masc,nhum).
-n(défaitisme,P,Q,sing,masc,nhum).
 n(minigolf,P,Q,sing,masc,nhum).
-n(exempt,P,Q,sing,masc,nhum).
 n(filet,P,Q,sing,masc,nhum).
 n(dossard,P,Q,sing,masc,nhum).
 n(marqué,P,Q,sing,fem,nhum).
-n(surfeur,P,Q,sing,masc,nhum).
-n(batteur,P,Q,sing,masc,nhum).
+n(surfeur,P,Q,sing,masc,hum).
+n(batteur,P,Q,sing,masc,hum).
 n(volley,P,Q,sing,masc,nhum).
 n(windsurf,P,Q,sing,masc,nhum).
-n(coulé,P,Q,sing,masc,nhum).
-n(courbette,P,Q,sing,fem,nhum).
-n(yachtsman,P,Q,sing,masc,nhum).
 n(gainage,P,Q,sing,masc,nhum).
 n(paintball,P,Q,sing,masc,nhum).
 n(galop,P,Q,sing,masc,nhum).
 n(but,P,Q,sing,masc,nhum).
 n(arbalète,P,Q,sing,fem,nhum).
-n(aiguille,P,Q,sing,fem,nhum).
-n(ovale,P,Q,sing,masc,nhum).
 n(court,P,Q,sing,masc,nhum).
 n(étrier,P,Q,sing,masc,nhum).
-n(participant,P,Q,sing,masc,nhum).
+n(participant,P,Q,sing,masc,hum).
 n(camp,P,Q,sing,masc,nhum).
-n(marqueur,P,Q,sing,masc,nhum).
-n(motocrosseur,P,Q,sing,masc,nhum).
-n(plaisir,P,Q,sing,masc,hum).
-n(joueuse,P,Q,sing,fem,nhum).
-n(billard,P,Q,sing,masc,hum).
+n(marqueur,P,Q,sing,masc,hum).
+n(motocrosseur,P,Q,sing,masc,hum).
+n(plaisir,P,Q,sing,masc,nhum).
+n(joueuse,P,Q,sing,fem,hum).
+n(billard,P,Q,sing,masc,nhum).
 n(ouverture,P,Q,sing,fem,nhum).
 n(disque,P,Q,sing,masc,nhum).
-n(agrès,P,Q,sing,masc,nhum).
 n(sportive,P,Q,sing,fem,hum).
-n(skipper,P,Q,sing,masc,nhum).
 n(relais,P,Q,sing,masc,nhum).
-n(horse-ball,P,Q,sing,masc,nhum).
-n(faune,P,Q,sing,fem,hum).
-n(turf,P,Q,sing,masc,nhum).
-n(étoile,P,Q,sing,fem,hum).
 n(canotage,P,Q,sing,masc,nhum).
 n(allures,P,Q,plur,fem,nhum).
-n(bai,P,Q,sing,masc,nhum).
 n(nul,P,Q,sing,masc,nhum).
 n(galopade,P,Q,sing,fem,nhum).
 n(défenses,P,Q,plur,fem,nhum).
 n(allonge,P,Q,sing,fem,nhum).
 n(tricherie,P,Q,sing,fem,nhum).
 n(voltige,P,Q,sing,fem,nhum).
-n(contre-performance,P,Q,sing,fem,nhum).
+% n(contre-performance,P,Q,sing,fem,nhum).
 n(corde,P,Q,sing,fem,nhum).
 n(tennisman,P,Q,sing,masc,hum).
-n(spéléologie,P,Q,sing,fem,nhum).
 n(charnière,P,Q,sing,fem,nhum).
 n(curling,P,Q,sing,masc,nhum).
 n(numéro,P,Q,sing,masc,nhum).
-n(paresthésie,P,Q,sing,fem,nhum).
 n(mousqueton,P,Q,sing,masc,nhum).
 n(tuba,P,Q,sing,masc,nhum).
-n(kayak-polo,P,Q,sing,masc,nhum).
+% n(kayak-polo,P,Q,sing,masc,nhum).
 n(drop,P,Q,sing,masc,nhum).
 n(interdits,P,Q,plur,masc,nhum).
-n(défense,P,Q,sing,fem,hum).
+n(défense,P,Q,sing,fem,nhum).
 n(passe,P,Q,sing,fem,nhum).
-n(amortie,P,Q,sing,fem,nhum).
-n(exsurgence,P,Q,sing,fem,nhum).
-n(quotidien,P,Q,sing,masc,hum).
-n(haineux,P,Q,plur,masc,nhum).
-n(schuss,P,Q,plur,masc,hum).
 n(capitaine,P,Q,sing,masc,hum).
 n(activité,P,Q,sing,fem,nhum).
 n(raquette,P,Q,sing,fem,nhum).
 n(publicitaire,P,Q,sing,masc,nhum).
-n(caveçon,P,Q,sing,masc,hum).
 n(droit,P,Q,sing,masc,nhum).
-n(géant,P,Q,sing,masc,nhum).
-n(streetboard,P,Q,sing,masc,nhum).
-n(lacune,P,Q,sing,fem,nhum).
-n(fond,P,Q,sing,masc,nhum).
-n(pesage,P,Q,sing,masc,nhum).
-n(free-style,P,Q,sing,masc,hum).
-n(estrapasser,P,Q,plur,masc,nhum).
-n(alezan,P,Q,sing,masc,hum).
-n(circuit,P,Q,sing,masc,nhum).
-n(passeur,P,Q,sing,masc,nhum).
-n(skimboard,P,Q,sing,masc,nhum).
-n(tendinopathie,P,Q,sing,fem,hum).
+n(passeur,P,Q,sing,masc,hum).
 n(aviateur,P,Q,sing,masc,hum).
-n(chasse-neige,P,Q,plur,masc,nhum).
-n(jokari,P,Q,sing,masc,nhum).
-n(fronton,P,Q,sing,masc,nhum).
-n(trentain,P,Q,sing,masc,nhum).
 n(musculation,P,Q,sing,fem,nhum).
 n(plongée,P,Q,sing,fem,nhum).
-n(hypoacousie,P,Q,sing,fem,nhum).
-n(habit,P,Q,sing,masc,nhum).
-n(ligament,P,Q,sing,masc,nhum).
-n(triplé,P,Q,sing,masc,hum).
-n(manège,P,Q,sing,masc,nhum).
-n(motocross,P,Q,plur,masc,hum).
+n(triplé,P,Q,sing,masc,nhum).
+n(motocross,P,Q,plur,masc,nhum).
 n(fitness,P,Q,sing,masc,nhum).
-n(roque,P,Q,sing,masc,nhum).
 n(gardien,P,Q,sing,masc,hum).
-n(balise,P,Q,sing,fem,nhum).
 n(nageur,P,Q,sing,masc,hum).
-n(quota,P,Q,sing,masc,nhum).
 n(pivot,P,Q,sing,masc,nhum).
 n(pentathlon,P,Q,sing,masc,nhum).
-n(surdité,P,Q,sing,fem,nhum).
 n(détente,P,Q,sing,fem,nhum).
 n(bobsleigh,P,Q,sing,masc,nhum).
 n(portée,P,Q,sing,fem,nhum).
 n(revers,P,Q,sing,masc,nhum).
-n(giraviation,P,Q,sing,fem,nhum).
 n(golf,P,Q,sing,masc,nhum).
 n(jonglerie,P,Q,sing,fem,nhum).
-n(plaquer,P,Q,sing,masc,hum).
-n(descendeur,P,Q,sing,masc,nhum).
-n(pendule,P,Q,sing,masc,nhum).
+n(plaquer,P,Q,sing,masc,nhum).
 n(figure,P,Q,sing,fem,nhum).
-n(guêtre,P,Q,sing,fem,nhum).
 n(knockdown,P,Q,sing,masc,nhum).
-n(débourrement,P,Q,sing,masc,nhum).
-n(plongeur,P,Q,sing,masc,nhum).
+n(plongeur,P,Q,sing,masc,hum).
 n(croisière,P,Q,sing,fem,nhum).
 n(appui,P,Q,sing,masc,nhum).
 n(coureur,P,Q,sing,masc,hum).
-n(palomino,P,Q,sing,masc,hum).
-n(indifférence,P,Q,sing,fem,hum).
-n(dopant,P,Q,sing,masc,nhum).
 n(boules,P,Q,plur,fem,nhum).
 n(crampon,P,Q,sing,masc,nhum).
 n(patinette,P,Q,sing,fem,nhum).
 n(coudière,P,Q,sing,fem,nhum).
-n(scull,P,Q,sing,masc,nhum).
-n(professionnels,P,Q,plur,masc,nhum).
-n(podomètre,P,Q,sing,masc,nhum).
+n(professionnels,P,Q,plur,masc,hum).
 n(hooliganisme,P,Q,sing,masc,nhum).
 n(sprint,P,Q,sing,masc,nhum).
-n(show-business,P,Q,plur,masc,nhum).
-n(champion,P,Q,sing,masc,nhum).
+n(champion,P,Q,sing,masc,hum).
 n(tir,P,Q,sing,masc,nhum).
-n(fronteau,P,Q,sing,masc,nhum).
 n(carrière,P,Q,sing,fem,nhum).
-n(catcheur,P,Q,sing,masc,nhum).
-n(motocycliste,P,Q,sing,fem,nhum).
+n(catcheur,P,Q,sing,masc,hum).
+n(motocycliste,P,Q,sing,fem,hum).
 n(santé,P,Q,sing,fem,nhum).
-n(poursuiteur,P,Q,sing,masc,nhum).
-n(palette,P,Q,sing,fem,hum).
 n(jockey,P,Q,sing,masc,hum).
 n(boxeur,P,Q,sing,masc,hum).
-n(perchiste,P,Q,sing,masc,nhum).
-n(concrétion,P,Q,sing,fem,nhum).
-n(pilote,P,Q,sing,masc,nhum).
+n(perchiste,P,Q,sing,masc,hum).
+n(pilote,P,Q,sing,masc,hum).
 n(basketball,P,Q,sing,masc,nhum).
-n(encorder,P,Q,sing,masc,nhum).
-n(cadre,P,Q,sing,masc,nhum).
 n(intervalle,P,Q,sing,masc,nhum).
 n(lucarne,P,Q,sing,fem,nhum).
-n(voilier,P,Q,sing,masc,hum).
-n(tumbling,P,Q,sing,masc,nhum).
+n(voilier,P,Q,sing,masc,nhum).
 n(relégation,P,Q,sing,fem,nhum).
-n(chevaler,P,Q,sing,masc,nhum).
 n(duel,P,Q,sing,masc,nhum).
-n(patate,P,Q,sing,masc,hum).
-n(joueurs,P,Q,plur,masc,nhum).
-n(clavette,P,Q,sing,fem,nhum).
+n(joueurs,P,Q,plur,masc,hum).
 n(peloton,P,Q,sing,masc,nhum).
-n(rondelle,P,Q,sing,fem,hum).
 n(timing,P,Q,sing,masc,nhum).
-n(carogne,P,Q,sing,fem,nhum).
-n(amateurs,P,Q,plur,fem,nhum).
+n(amateurs,P,Q,plur,masc,hum).
 n(dunk,P,Q,sing,fem,nhum).
-n(flore,P,Q,sing,fem,nhum).
-n(albatros,P,Q,plur,masc,hum).
-n(affûtage,P,Q,sing,masc,nhum).
-n(ju-jitsu,P,Q,sing,masc,nhum).
-n(plastron,P,Q,sing,masc,nhum).
-n(ardoisier,P,Q,sing,masc,nhum).
-n(aplomb,P,Q,sing,masc,nhum).
-n(mercato,P,Q,sing,masc,nhum).
-n(finaliste,P,Q,sing,fem,nhum).
-n(pronostiqueur,P,Q,sing,masc,nhum).
-n(volley-ball,P,Q,sing,masc,nhum).
-n(quarte,P,Q,sing,fem,nhum).
-n(varappe,P,Q,sing,fem,nhum).
+% n(ju-jitsu,P,Q,sing,masc,nhum).
+n(finaliste,P,Q,sing,fem,hum).
+n(pronostiqueur,P,Q,sing,masc,hum).
+% n(volley-ball,P,Q,sing,masc,nhum).
 n(trophée,P,Q,sing,masc,nhum).
 n(skis,P,Q,plur,masc,nhum).
 n(enchaînement,P,Q,sing,masc,nhum).
-n(poinçon,P,Q,sing,masc,hum).
 n(football,P,Q,sing,masc,nhum).
 n(esquive,P,Q,sing,fem,nhum).
-n(kop,P,Q,sing,masc,nhum).
-n(jupette,P,Q,sing,fem,nhum).
-n(monte-pente,P,Q,sing,masc,nhum).
-n(amble,P,Q,sing,masc,nhum).
-n(sweat,P,Q,sing,masc,nhum).
 n(talonnage,P,Q,sing,masc,nhum).
 n(épée,P,Q,sing,fem,nhum).
 n(lanceur,P,Q,sing,masc,hum).
 n(télévision,P,Q,sing,fem,nhum).
-n(claquettes,P,Q,plur,fem,nhum).
-n(rough,P,Q,sing,masc,nhum).
-n(consultant,P,Q,sing,masc,nhum).
-n(starting-blocks,P,Q,plur,masc,nhum).
+% n(starting-blocks,P,Q,plur,masc,nhum).
 n(aviation,P,Q,sing,fem,nhum).
-n(brassière,P,Q,sing,fem,nhum).
 n(planche,P,Q,sing,fem,nhum).
 n(solo,P,Q,sing,masc,nhum).
-n(fondeur,P,Q,sing,masc,hum).
-n(jument,P,Q,sing,fem,hum).
 n(vélos,P,Q,plur,masc,nhum).
 n(calories,P,Q,plur,fem,nhum).
-n(pesade,P,Q,sing,fem,nhum).
 n(étape,P,Q,sing,fem,nhum).
 n(régatier,P,Q,sing,masc,hum).
-n(surplace,P,Q,sing,masc,nhum).
 n(sprinter,P,Q,sing,masc,nhum).
-n(miler,P,Q,sing,fem,nhum).
-n(ping-pong,P,Q,plur,masc,nhum).
+% n(ping-pong,P,Q,plur,masc,nhum).
 n(skatepark,P,Q,sing,masc,nhum).
-n(sidecariste,P,Q,sing,masc,nhum).
-n(snowkite,P,Q,sing,masc,nhum).
-n(colombophilie,P,Q,sing,fem,nhum).
-n(demi-finaliste,P,Q,sing,fem,nhum).
+% n(demi-finaliste,P,Q,sing,fem,nhum).
 n(cavalier,P,Q,sing,masc,nhum).
 n(salsa,P,Q,sing,fem,nhum).
-n(cocotte,P,Q,sing,fem,hum).
-n(sabre,P,Q,sing,masc,hum).
-n(barreur,P,Q,sing,masc,hum).
-n(sportsman,P,Q,sing,masc,nhum).
+n(cocotte,P,Q,sing,fem,nhum).
+n(sabre,P,Q,sing,masc,nhum).
 n(haltère,P,Q,sing,masc,nhum).
 n(fleurettiste,P,Q,sing,fem,nhum).
 n(sanction,P,Q,sing,fem,nhum).
 n(pédalier,P,Q,sing,masc,nhum).
 n(trot,P,Q,sing,masc,nhum).
-n(culture,P,Q,sing,fem,nhum).
 n(plongeon,P,Q,sing,masc,nhum).
-n(tonneau,P,Q,sing,masc,nhum).
-n(rustine,P,Q,sing,fem,nhum).
-n(avertissement,P,Q,sing,masc,hum).
-n(expulsion,P,Q,sing,fem,hum).
-n(mondialisation,P,Q,sing,fem,nhum).
-n(agrès,P,Q,plur,masc,nhum).
-n(punch,P,Q,sing,masc,nhum).
-n(carabinier,P,Q,sing,masc,nhum).
+n(avertissement,P,Q,sing,masc,nhum).
+n(expulsion,P,Q,sing,fem,nhum).
+n(carabinier,P,Q,sing,masc,hum).
 n(téléski,P,Q,sing,masc,hum).
 n(égalisation,P,Q,sing,fem,nhum).
 n(thèque,P,Q,sing,fem,nhum).
-n(ouvala,P,Q,sing,fem,nhum).
 n(socquettes,P,Q,plur,fem,nhum).
 n(direct,P,Q,sing,masc,nhum).
-n(stawug,P,Q,sing,masc,nhum).
 n(passion,P,Q,sing,fem,nhum).
 n(dribble,P,Q,sing,masc,nhum).
-n(brise-cou,P,Q,plur,fem,nhum).
-n(tejo,P,Q,sing,masc,nhum).
 n(canoé,P,Q,sing,masc,nhum).
 n(base,P,Q,sing,fem,nhum).
-n(callisthénie,P,Q,sing,fem,nhum).
-n(maillet,P,Q,sing,masc,nhum).
-n(musculaire,P,Q,sing,fem,hum).
+n(musculaire,P,Q,sing,fem,nhum).
 n(seller,P,Q,sing,masc,nhum).
 n(freeboard,P,Q,sing,fem,nhum).
 n(sautoir,P,Q,sing,masc,nhum).
 n(looping,P,Q,sing,masc,nhum).
-n(escrimeur,P,Q,sing,masc,nhum).
-n(trait,P,Q,sing,masc,nhum).
-n(tennis,P,Q,plur,masc,nhum).
-n(échevelée,P,Q,sing,fem,nhum).
+n(escrimeur,P,Q,sing,masc,hum).
+n(tennis,P,Q,sing,masc,nhum).
 n(rabattement,P,Q,sing,masc,nhum).
-n(septime,P,Q,sing,fem,nhum).
 n(doublé,P,Q,sing,masc,nhum).
 n(handballeur,P,Q,sing,masc,hum).
 n(marin,P,Q,sing,masc,hum).
-n(coincement,P,Q,sing,masc,nhum).
-n(cramponnage,P,Q,sing,masc,nhum).
-n(jauge,P,Q,sing,fem,nhum).
-n(voiture,P,Q,sing,masc,hum).
-n(martingale,P,Q,sing,fem,nhum).
-n(shoot,P,Q,sing,masc,nhum).
-n(clinch,P,Q,sing,masc,nhum).
-n(obésité,P,Q,sing,fem,nhum).
-n(route,P,Q,sing,fem,nhum).
 n(haltères,P,Q,plur,masc,nhum).
 n(catamaran,P,Q,sing,masc,nhum).
-n(plaqueur,P,Q,sing,masc,nhum).
-n(enrênement,P,Q,sing,masc,nhum).
-n(homologuer,P,Q,sing,fem,nhum).
-n(flèche,P,Q,sing,fem,hum).
+n(plaqueur,P,Q,sing,masc,hum).
 n(selle,P,Q,sing,fem,nhum).
 n(tandem,P,Q,sing,masc,nhum).
-n(étalon,P,Q,sing,masc,nhum).
+n(étalon,P,Q,sing,masc,hum).
 n(pénalisation,P,Q,sing,fem,nhum).
-n(mulet,P,Q,sing,masc,hum).
-n(ola,P,Q,sing,fem,nhum).
-n(fanon,P,Q,sing,masc,nhum).
-n(rebot,P,Q,sing,masc,nhum).
 n(piste,P,Q,sing,fem,nhum).
 n(aquaplane,P,Q,sing,masc,nhum).
-n(espalier,P,Q,sing,masc,nhum).
-n(cadet,P,Q,sing,masc,nhum).
-n(round,P,Q,sing,masc,nhum).
-n(dur,P,Q,sing,masc,nhum).
-n(boomerang,P,Q,sing,masc,hum).
+n(boomerang,P,Q,sing,masc,nhum).
 n(ceinture,P,Q,sing,fem,nhum).
-n(bookmakeur,P,Q,sing,masc,nhum).
-n(torball,P,Q,sing,masc,nhum).
-n(shooter,P,Q,sing,masc,nhum).
 n(gymnastique,P,Q,sing,fem,nhum).
-n(quilles,P,Q,plur,fem,hum).
-n(couleur,P,Q,sing,fem,hum).
-n(torero,P,Q,sing,masc,nhum).
-n(crampe,P,Q,sing,fem,hum).
-n(kinésiologie,P,Q,sing,fem,nhum).
-n(tocard,P,Q,sing,masc,hum).
-n(manchot,P,Q,sing,masc,hum).
-n(porte-manteau,P,Q,sing,masc,nhum).
-n(manier,P,Q,sing,masc,nhum).
-n(yachting,P,Q,sing,masc,nhum).
-n(portique,P,Q,sing,masc,nhum).
+n(quilles,P,Q,plur,fem,nhum).
+n(couleur,P,Q,sing,fem,nhum).
+n(crampe,P,Q,sing,fem,nhum).
 n(rencontre,P,Q,sing,fem,nhum).
 n(championnat,P,Q,sing,masc,nhum).
 n(tatami,P,Q,sing,masc,nhum).
-n(phénomène,P,Q,sing,masc,hum).
-n(monotype,P,Q,sing,fem,nhum).
 n(fléchettes,P,Q,plur,fem,nhum).
 n(score,P,Q,sing,masc,nhum).
 n(derby,P,Q,sing,masc,nhum).
-n(interprétation,P,Q,sing,fem,nhum).
-n(yard,P,Q,sing,masc,nhum).
-n(remonte-pente,P,Q,sing,masc,nhum).
-n(fentre,P,Q,sing,fem,nhum).
-n(tee,P,Q,sing,masc,nhum).
 n(smash,P,Q,sing,masc,nhum).
-n(moto-ball,P,Q,sing,masc,nhum).
 n(sumotori,P,Q,sing,masc,hum).
-n(piton,P,Q,sing,masc,nhum).
-n(footeux,P,Q,sing,masc,nhum).
-n(bosses,P,Q,plur,fem,nhum).
+n(footeux,P,Q,sing,masc,hum).
 n(penalty,P,Q,sing,masc,nhum).
-n(terrien,P,Q,sing,masc,nhum).
-n(agent,P,Q,sing,masc,nhum).
 n(vrille,P,Q,sing,fem,nhum).
-n(sifflet,P,Q,sing,masc,nhum).
-n(dévissage,P,Q,sing,fem,nhum).
-n(sauvetage,P,Q,sing,masc,nhum).
-n(cycle,P,Q,sing,masc,nhum).
-n(vélomobile,P,Q,sing,fem,nhum).
-n(chelem,P,Q,sing,masc,nhum).
-n(gearbox,P,Q,sing,fem,nhum).
-n(pommeau,P,Q,sing,masc,hum).
-n(medley,P,Q,sing,masc,nhum).
-n(cycliste,P,Q,sing,fem,hum).
-n(breton,P,Q,sing,masc,hum).
-n(barre,P,Q,sing,fem,nhum).
-n(blocage,P,Q,sing,masc,nhum).
-n(passade,P,Q,sing,fem,nhum).
-n(coller,P,Q,sing,fem,nhum).
-n(touchette,P,Q,sing,fem,hum).
-n(plot,P,Q,sing,masc,nhum).
-n(gant,P,Q,sing,masc,nhum).
-n(scorer,P,Q,sing,fem,nhum).
-n(aller-retour,P,Q,plur,masc,nhum).
-n(yuko,P,Q,sing,masc,nhum).
-n(arrêt,P,Q,sing,masc,nhum).
-n(sportif,P,Q,sing,masc,hum).
-n(filets,P,Q,plur,masc,nhum).
-n(motocyclisme,P,Q,sing,masc,nhum).
-n(samba,P,Q,sing,fem,nhum).
-n(croisé,P,Q,sing,masc,nhum).
-n(montée,P,Q,sing,fem,nhum).
-n(aspie,P,Q,sing,fem,nhum).
-n(streetball,P,Q,sing,masc,nhum).
-n(chaussettes,P,Q,plur,fem,nhum).
-n(pelouse,P,Q,sing,masc,nhum).
-n(set,P,Q,sing,masc,nhum).
-n(témoin,P,Q,sing,masc,nhum).
-n(appareil,P,Q,sing,masc,hum).
-n(piaffement,P,Q,sing,masc,nhum).
-n(chevauchée,P,Q,sing,fem,nhum).
-n(coquille,P,Q,sing,fem,nhum).
-n(savate,P,Q,sing,fem,nhum).
-n(dépitonnage,P,Q,sing,masc,nhum).
-n(présélection,P,Q,sing,fem,nhum).
-n(paleta,P,Q,sing,fem,nhum).
-n(tremplin,P,Q,sing,masc,nhum).
-n(longe,P,Q,sing,fem,hum).
-n(arts,P,Q,plur,masc,nhum).
-n(basket-ball,P,Q,sing,masc,nhum).
-n(hobby,P,Q,sing,masc,nhum).
-n(poupée,P,Q,sing,fem,nhum).
-n(keirin,P,Q,sing,masc,nhum).
-n(quinconce,P,Q,sing,masc,nhum).
-n(moto-neige,P,Q,sing,fem,nhum).
-n(joie,P,Q,sing,fem,hum).
-n(force,P,Q,sing,fem,nhum).
-n(compétition,P,Q,sing,fem,nhum).
-n(piaffer,P,Q,sing,masc,nhum).
-n(cerclage,P,Q,sing,masc,nhum).
-n(rodéo,P,Q,sing,masc,nhum).
-n(sprinteur,P,Q,sing,masc,hum).
-n(poussin,P,Q,sing,masc,hum).
-n(trampoline,P,Q,sing,masc,nhum).
-n(salle,P,Q,sing,fem,nhum).
-n(dépitonner,P,Q,sing,masc,nhum).
-n(club,P,Q,sing,fem,nhum).
-n(ligne,P,Q,sing,fem,nhum).
-n(handicap,P,Q,sing,masc,nhum).
-n(course,P,Q,sing,fem,nhum).
-n(discipline,P,Q,sing,fem,nhum).
-n(pontonnier,P,Q,sing,masc,hum).
-n(handisport,P,Q,sing,fem,nhum).
-n(chanbara,P,Q,sing,masc,nhum).
-n(automobiles,P,Q,plur,fem,nhum).
-n(radio,P,Q,sing,fem,hum).
-n(encordement,P,Q,sing,masc,nhum).
-n(masque,P,Q,sing,masc,nhum).
-n(bond,P,Q,sing,masc,nhum).
-n(angulation,P,Q,sing,fem,nhum).
-n(mountainboard,P,Q,sing,masc,nhum).
-n(kenjutsu,P,Q,sing,masc,nhum).
-n(grappling,P,Q,sing,masc,nhum).
-n(voile,P,Q,sing,fem,hum).
-n(pencak,P,Q,sing,masc,nhum).
-n(pencak-silat,P,Q,sing,masc,nhum).
-n(mesure,P,Q,sing,fem,nhum).
-n(chambara,P,Q,sing,masc,nhum).
-n(chandelle,P,Q,sing,fem,nhum).
-n(silat,P,Q,sing,masc,nhum).
-n(tierce,P,Q,sing,fem,nhum).
-n(beauté,P,Q,sing,fem,nhum).
-n(hypnotiseur,P,Q,sing,masc,nhum).
-n(traîneaux,P,Q,plur,masc,nhum).
-n(religions,P,Q,plur,fem,nhum).
-n(extérieur,P,Q,sing,masc,nhum).
-n(lame,P,Q,sing,fem,nhum).
-n(nageurs,P,Q,plur,masc,nhum).
-n(hockeyeur,P,Q,sing,masc,nhum).
-n(effet,P,Q,sing,masc,nhum).
-n(tölt,P,Q,sing,masc,nhum).
-n(hip-hop,P,Q,sing,masc,nhum).
-n(triplette,P,Q,sing,fem,nhum).
-n(sport-boules,P,Q,sing,masc,nhum).
-n(rétablissement,P,Q,sing,masc,nhum).
-n(religion,P,Q,sing,fem,hum).
-n(surcompensation,P,Q,sing,fem,nhum).
-n(cinéma,P,Q,sing,masc,nhum).
-n(lexique,P,Q,sing,masc,nhum).
-n(gymnasiarque,P,Q,sing,fem,nhum).
-n(quad,P,Q,sing,masc,nhum).
-n(marteau,P,Q,sing,masc,nhum).
-n(bourrelet,P,Q,sing,masc,nhum).
-n(vendanger,P,Q,sing,masc,nhum).
-n(contre-attaque,P,Q,sing,fem,nhum).
-n(annonceur,P,Q,sing,masc,nhum).
-n(commencer,P,Q,sing,masc,hum).
-n(moulinet,P,Q,sing,masc,nhum).
-n(squash,P,Q,sing,masc,nhum).
-n(coronaropathie,P,Q,sing,fem,nhum).
-n(contrôle,P,Q,sing,masc,nhum).
-n(futal,P,Q,sing,fem,nhum).
-n(muscle,P,Q,sing,masc,nhum).
-n(véliplanchiste,P,Q,sing,fem,nhum).
-n(ligue,P,Q,sing,fem,hum).
-n(psychologue,P,Q,sing,masc,nhum).
-n(beige,P,Q,sing,masc,hum).
-n(haie,P,Q,sing,fem,hum).
-n(trekking,P,Q,sing,masc,nhum).
-n(side-car,P,Q,sing,masc,nhum).
-n(van,P,Q,sing,masc,nhum).
-n(corde,P,Q,sing,fem,hum).
-n(escalade,P,Q,sing,fem,nhum).
-n(plateau,P,Q,sing,masc,nhum).
-n(fauchage,P,Q,sing,masc,nhum).
-n(aubin,P,Q,sing,masc,hum).
-n(soutif,P,Q,sing,masc,nhum).
-n(septembre,P,Q,sing,masc,nhum).
-n(équerre,P,Q,sing,fem,nhum).
-n(coup,P,Q,sing,masc,nhum).
-n(tomber,P,Q,sing,masc,nhum).
-n(lugeuse,P,Q,sing,fem,nhum).
-n(équerre,P,Q,sing,masc,nhum).
-n(continuité,P,Q,sing,fem,nhum).
-n(marque,P,Q,sing,fem,nhum).
-n(minime,P,Q,sing,masc,nhum).
-n(skeleton,P,Q,sing,masc,nhum).
-n(vol,P,Q,sing,masc,nhum).
-n(skicross,P,Q,sing,masc,nhum).
-n(novillada,P,Q,sing,fem,nhum).
-n(jeux,P,Q,plur,masc,nhum).
-n(jogger,P,Q,sing,masc,nhum).
-n(gonflette,P,Q,sing,fem,nhum).
-n(carne,P,Q,sing,fem,hum).
-n(spéléologue,P,Q,sing,fem,hum).
-n(commissaire,P,Q,sing,fem,hum).
-n(tonte,P,Q,sing,fem,nhum).
-n(passing,P,Q,sing,masc,nhum).
-n(franchise,P,Q,sing,fem,nhum).
-n(cache-col,P,Q,plur,masc,nhum).
-n(éperon,P,Q,sing,masc,nhum).
-n(plaisance,P,Q,sing,fem,nhum).
-n(karatéka,P,Q,sing,fem,nhum).
-n(tractions,P,Q,plur,fem,nhum).
-n(protège-dents,P,Q,plur,masc,nhum).
-n(botte,P,Q,sing,fem,hum).
-n(ski,P,Q,sing,masc,nhum).
-n(contrattaque,P,Q,sing,fem,nhum).
-n(pince-nez,P,Q,sing,masc,nhum).
-n(défenseur,P,Q,sing,masc,nhum).
-n(paume,P,Q,sing,fem,nhum).
-n(octave,P,Q,sing,fem,nhum).
-n(musette,P,Q,sing,fem,nhum).
-n(genette,P,Q,sing,fem,hum).
-n(captagon,P,Q,sing,masc,nhum).
-n(cote,P,Q,sing,fem,nhum).
-n(buteur,P,Q,sing,masc,nhum).
-n(piste,P,Q,sing,fem,hum).
-n(haridelle,P,Q,sing,fem,hum).
-n(patin,P,Q,sing,masc,hum).
-n(virage,P,Q,sing,masc,nhum).
-n(traçant,P,Q,plur,masc,nhum).
-n(boardercross,P,Q,sing,masc,nhum).
-n(périple,P,Q,sing,masc,nhum).
-n(gants,P,Q,plur,masc,nhum).
-n(pressing,P,Q,sing,masc,nhum).
-n(record,P,Q,sing,masc,nhum).
-n(automobilisme,P,Q,sing,masc,nhum).
-n(gauche,P,Q,sing,masc,nhum).
-n(poids,P,Q,plur,masc,nhum).
-n(karting,P,Q,sing,masc,nhum).
-n(gratte-dos,P,Q,plur,masc,nhum).
-n(croupière,P,Q,sing,fem,nhum).
-n(bavette,P,Q,sing,fem,hum).
-n(rallye,P,Q,sing,masc,nhum).
-n(palet,P,Q,sing,masc,hum).
-n(box,P,Q,sing,masc,nhum).
-n(classement,P,Q,sing,masc,hum).
-n(étrivière,P,Q,sing,fem,nhum).
-n(grimpeur,P,Q,sing,masc,nhum).
-n(peignoir,P,Q,sing,masc,nhum).
-n(débutant,P,Q,sing,masc,nhum).
-n(mouvement,P,Q,sing,masc,nhum).
-n(plaisancier,P,Q,sing,masc,nhum).
-n(anneaux,P,Q,plur,masc,nhum).
-n(chasse,P,Q,sing,fem,nhum).
-n(télésiège,P,Q,sing,masc,nhum).
-n(journaux,P,Q,plur,masc,nhum).
-n(homophone,P,Q,sing,masc,nhum).
-n(filet,P,Q,sing,masc,hum).
-n(foot,P,Q,sing,masc,nhum).
-n(retour,P,Q,sing,masc,nhum).
-n(yoga,P,Q,sing,masc,nhum).
-n(stoppeur,P,Q,sing,masc,nhum).
-n(compétiteur,P,Q,sing,masc,nhum).
-n(style,P,Q,sing,masc,nhum).
-n(wave-ski,P,Q,sing,masc,nhum).
-n(quinte,P,Q,sing,fem,nhum).
-n(manipulation,P,Q,sing,fem,nhum).
-n(équilibre,P,Q,sing,masc,nhum).
-n(rondade,P,Q,sing,fem,hum).
-n(pastis,P,Q,plur,masc,hum).
-n(téléachat,P,Q,sing,fem,nhum).
-n(lutteur,P,Q,sing,masc,hum).
-n(carre,P,Q,sing,fem,nhum).
-n(amateurisme,P,Q,sing,masc,nhum).
-n(jury,P,Q,sing,masc,nhum).
-n(judo,P,Q,sing,masc,nhum).
-n(gonflage,P,Q,sing,masc,nhum).
-n(palonnier,P,Q,sing,masc,nhum).
-n(monnaie,P,Q,sing,fem,nhum).
-n(streetluge,P,Q,sing,fem,nhum).
-n(médaille,P,Q,sing,fem,hum).
-n(sphère,P,Q,sing,fem,hum).
-n(furieux,P,Q,plur,masc,nhum).
-n(archer,P,Q,sing,masc,hum).
-n(arbitrage,P,Q,sing,masc,nhum).
-n(isabelle,P,Q,sing,fem,hum).
-n(pyrénéisme,P,Q,sing,masc,nhum).
-n(jet,P,Q,sing,masc,nhum).
-n(rameur,P,Q,sing,masc,nhum).
-n(croix,P,Q,plur,fem,nhum).
-n(frein,P,Q,sing,masc,nhum).
-n(surprise,P,Q,sing,fem,hum).
-n(engin,P,Q,sing,masc,hum).
-n(juge,P,Q,sing,masc,hum).
-n(note,P,Q,sing,fem,nhum).
-n(triche,P,Q,sing,fem,nhum).
-n(novembre,P,Q,sing,masc,nhum).
-n(jumping,P,Q,sing,masc,nhum).
-n(endurance,P,Q,sing,fem,nhum).
-n(pédale,P,Q,sing,fem,nhum).
-n(pétanque,P,Q,sing,fem,nhum).
-n(chaussure,P,Q,sing,fem,hum).
-n(hack,P,Q,sing,masc,hum).
-n(arçons,P,Q,plur,masc,nhum).
-n(challenger,P,Q,sing,masc,nhum).
-n(avalement,P,Q,sing,masc,nhum).
-n(déstabilisation,P,Q,sing,fem,nhum).
-n(complet,P,Q,sing,masc,nhum).
-n(méthodologie,P,Q,sing,fem,hum).
-n(criquet,P,Q,sing,masc,hum).
-n(équipe,P,Q,sing,fem,nhum).
-n(concourir,P,Q,sing,masc,hum).
-n(manager,P,Q,sing,masc,nhum).
-n(démocratie,P,Q,sing,fem,nhum).
-n(médaille,P,Q,sing,fem,nhum).
-n(minceur,P,Q,sing,masc,nhum).
-n(funboard,P,Q,sing,masc,hum).
-n(touche,P,Q,sing,fem,nhum).
-n(spatule,P,Q,sing,fem,hum).
-n(varappeur,P,Q,sing,masc,nhum).
-n(coupe,P,Q,sing,fem,nhum).
-n(labrum,P,Q,sing,masc,nhum).
-n(tacot,P,Q,sing,masc,nhum).
-n(kitespeed,P,Q,sing,masc,nhum).
-n(réglette,P,Q,sing,fem,nhum).
-n(agonistique,P,Q,sing,fem,nhum).
-n(bob,P,Q,sing,masc,nhum).
-n(maître-nageur,P,Q,sing,masc,nhum).
-n(step,P,Q,sing,masc,nhum).
-n(étirement,P,Q,sing,masc,nhum).
-n(parachutiste,P,Q,sing,fem,hum).
-n(links,P,Q,plur,masc,nhum).
-n(télémark,P,Q,sing,masc,nhum).
-n(ace,P,Q,sing,masc,nhum).
-n(compétence,P,Q,sing,fem,nhum).
-n(doublet,P,Q,sing,masc,nhum).
-n(perche,P,Q,sing,fem,hum).
-n(bâtonniste,P,Q,sing,masc,nhum).
-n(gueuse,P,Q,sing,fem,nhum).
-n(épaulé-jeté,P,Q,sing,masc,nhum).
-n(stem,P,Q,sing,masc,nhum).
-n(kitesurf,P,Q,sing,masc,nhum).
-n(lulu,P,Q,sing,masc,nhum).
-n(balancine,P,Q,sing,fem,nhum).
-n(vainqueur,P,Q,sing,masc,nhum).
-n(interdit,P,Q,sing,masc,nhum).
-n(t-shirt,P,Q,sing,masc,nhum).
-n(lune,P,Q,sing,fem,nhum).
-n(barreau,P,Q,sing,masc,hum).
-n(épéiste,P,Q,sing,fem,nhum).
-n(erreur,P,Q,sing,fem,nhum).
-n(rotation,P,Q,sing,fem,nhum).
-n(finale,P,Q,sing,fem,nhum).
-n(finish,P,Q,plur,masc,nhum).
-n(mars,P,Q,sing,masc,nhum).
-n(entretien,P,Q,sing,masc,nhum).
-n(calade,P,Q,sing,fem,nhum).
-n(sauteur,P,Q,sing,masc,hum).
-n(mêlée,P,Q,sing,fem,nhum).
-n(grimper,P,Q,sing,masc,nhum).
-n(bande,P,Q,sing,fem,nhum).
-n(piqué,P,Q,sing,masc,nhum).
-n(dan,P,Q,plur,masc,nhum).
-n(cavalier,P,Q,sing,masc,hum).
-n(raquette,P,Q,sing,fem,hum).
-n(oulak,P,Q,sing,masc,nhum).
-n(bunker,P,Q,sing,masc,nhum).
-n(moucheté,P,Q,sing,masc,nhum).
-n(judoka,P,Q,sing,fem,nhum).
-n(habillement,P,Q,sing,masc,nhum).
-n(combine,P,Q,sing,fem,nhum).
-n(culturisme,P,Q,sing,masc,nhum).
-n(gendarme,P,Q,sing,masc,hum).
-n(participer,P,Q,sing,masc,nhum).
-n(cross,P,Q,plur,masc,nhum).
-n(victoire,P,Q,sing,fem,nhum).
-n(rouleur,P,Q,sing,masc,nhum).
-n(repêchage,P,Q,sing,masc,nhum).
-n(attitudes,P,Q,plur,fem,nhum).
-n(international,P,Q,sing,masc,nhum).
-n(drive,P,Q,sing,masc,nhum).
-n(provocation,P,Q,sing,fem,nhum).
-n(rappel,P,Q,sing,masc,nhum).
-n(pointe,P,Q,sing,fem,nhum).
-n(déplacement,P,Q,sing,masc,nhum).
-n(vert,P,Q,sing,masc,hum).
-n(hydrospeed,P,Q,sing,masc,nhum).
-n(coaching,P,Q,sing,masc,nhum).
-n(poulain,P,Q,sing,masc,hum).
-n(porter,P,Q,sing,masc,nhum).
-n(arçon,P,Q,sing,masc,nhum).
-n(dépense,P,Q,sing,fem,nhum).
-n(aïkidoka,P,Q,sing,masc,nhum).
-n(suiveur,P,Q,sing,masc,nhum).
-n(dameuse,P,Q,sing,fem,nhum).
-n(forfait,P,Q,sing,masc,nhum).
-n(canotier,P,Q,sing,masc,nhum).
-n(bandy,P,Q,sing,masc,nhum).
-n(ressources,P,Q,plur,fem,hum).
-n(passé,P,Q,sing,masc,nhum).
-n(gymnase,P,Q,sing,masc,nhum).
-n(poudreuse,P,Q,sing,fem,nhum).
-n(centre,P,Q,sing,masc,nhum).
-n(catégorie,P,Q,sing,fem,nhum).
-n(physique,P,Q,sing,fem,nhum).
-n(cale-pied,P,Q,sing,masc,nhum).
-n(bringue,P,Q,sing,fem,nhum).
-n(détersion,P,Q,sing,fem,nhum).
-n(adversaire,P,Q,sing,fem,nhum).
-n(pneu,P,Q,sing,masc,nhum).
-n(boule,P,Q,sing,fem,nhum).
-n(skating,P,Q,sing,masc,nhum).
-n(manager,P,Q,sing,fem,nhum).
-n(jonglage,P,Q,sing,masc,hum).
-n(soufre,P,Q,sing,masc,nhum).
-n(bermuda,P,Q,sing,masc,nhum).
-n(freeride,P,Q,sing,masc,nhum).
-n(snowskate,P,Q,sing,masc,nhum).
-n(projection,P,Q,sing,fem,hum).
-n(tour,P,Q,sing,fem,nhum).
-n(bouton,P,Q,sing,masc,hum).
-n(flip,P,Q,sing,masc,nhum).
-n(hors-jeu,P,Q,plur,masc,nhum).
-n(bouée,P,Q,sing,fem,nhum).
-n(biomécanique,P,Q,sing,fem,nhum).
-n(forme,P,Q,sing,fem,nhum).
-n(sélecteur,P,Q,sing,masc,nhum).
-n(spa,P,Q,sing,masc,nhum).
-n(ébats,P,Q,plur,masc,nhum).
-n(attelage,P,Q,sing,masc,nhum).
-n(motoneigiste,P,Q,sing,fem,nhum).
-n(practice,P,Q,sing,masc,nhum).
-n(mail,P,Q,sing,masc,nhum).
-n(motoneigisme,P,Q,sing,masc,nhum).
-n(traction,P,Q,sing,fem,nhum).
-n(palette,P,Q,sing,fem,nhum).
-n(hockey,P,Q,sing,masc,nhum).
-n(volant,P,Q,sing,masc,hum).
-n(performance,P,Q,sing,fem,nhum).
-n(transfert,P,Q,sing,masc,nhum).
-n(roue,P,Q,sing,fem,nhum).
-n(bodyboard,P,Q,sing,masc,nhum).
-n(décontracté,P,Q,sing,masc,nhum).
-n(axe,P,Q,sing,masc,hum).
-n(épaulé,P,Q,sing,masc,nhum).
-n(sixte,P,Q,sing,fem,nhum).
-n(stakning,P,Q,sing,masc,nhum).
-n(offshore,P,Q,plur,masc,nhum).
-n(joueur,P,Q,sing,masc,nhum).
-n(loupé,P,Q,sing,masc,nhum).
-n(bodybuilder,P,Q,sing,masc,nhum).
-n(épreuve,P,Q,sing,fem,nhum).
-n(tortue,P,Q,sing,fem,hum).
-n(loisirs,P,Q,plur,masc,nhum).
-n(réception,P,Q,sing,fem,nhum).
-n(trottinette,P,Q,sing,fem,nhum).
-n(nunchaku,P,Q,sing,masc,nhum).
-n(styles,P,Q,plur,masc,nhum).
-n(pistolet,P,Q,sing,masc,hum).
-n(pas,P,Q,plur,masc,nhum).
-n(amazone,P,Q,sing,fem,hum).
-n(adaptations,P,Q,plur,fem,nhum).
-n(fart,P,Q,sing,masc,nhum).
-n(junior,P,Q,sing,masc,nhum).
-n(canon,P,Q,sing,masc,nhum).
-n(formation,P,Q,sing,fem,nhum).
-n(arrivée,P,Q,sing,fem,nhum).
-n(pancrace,P,Q,sing,masc,nhum).
-n(gymnique,P,Q,sing,fem,nhum).
-n(réaction,P,Q,sing,fem,nhum).
-n(maquignon,P,Q,sing,masc,nhum).
-n(grotte,P,Q,sing,fem,nhum).
-n(croupade,P,Q,sing,masc,nhum).
-n(envoi,P,Q,sing,masc,nhum).
-n(superwelter,P,Q,sing,masc,nhum).
-n(bosse,P,Q,sing,fem,nhum).
-n(beach-volley,P,Q,sing,masc,nhum).
-n(kayakiste,P,Q,sing,fem,hum).
-n(corsaire,P,Q,sing,masc,nhum).
-n(maille,P,Q,sing,fem,nhum).
-n(conseiller,P,Q,sing,masc,nhum).
-n(strangulation,P,Q,sing,fem,nhum).
-n(arrière,P,Q,sing,masc,nhum).
-n(tae-kwon-do,P,Q,sing,masc,nhum).
-n(tacle,P,Q,sing,masc,nhum).
-n(percussion,P,Q,sing,fem,nhum).
-n(cerf-volant,P,Q,sing,masc,hum).
-n(équipier,P,Q,sing,masc,nhum).
-n(slopestyle,P,Q,sing,masc,nhum).
-n(handball,P,Q,sing,masc,nhum).
-n(skwal,P,Q,sing,masc,nhum).
-n(barde,P,Q,sing,fem,hum).
-n(mastère,P,Q,sing,masc,nhum).
-n(semi-marathon,P,Q,sing,masc,nhum).
-n(dos,P,Q,plur,masc,nhum).
-n(désobstruction,P,Q,sing,fem,nhum).
-n(remplaçant,P,Q,sing,masc,nhum).
-n(pantalon,P,Q,sing,masc,nhum).
-n(qualification,P,Q,sing,fem,nhum).
-n(tango,P,Q,sing,masc,nhum).
-n(poirier,P,Q,sing,masc,hum).
-n(religieuses,P,Q,plur,fem,nhum).
-n(noble,P,Q,sing,fem,nhum).
-n(toile,P,Q,sing,fem,nhum).
-n(moniteur,P,Q,sing,masc,nhum).
-n(professionnel,P,Q,sing,masc,nhum).
-n(disqualification,P,Q,sing,fem,nhum).
-n(carrom,P,Q,sing,masc,nhum).
-n(supportrice,P,Q,sing,fem,nhum).
-n(volte,P,Q,sing,fem,nhum).
-n(espoir,P,Q,sing,masc,nhum).
-n(dragonne,P,Q,sing,fem,nhum).
-n(acrobate,P,Q,sing,masc,nhum).
-n(kumite,P,Q,sing,masc,nhum).
-n(arc,P,Q,sing,masc,nhum).
-n(athlète,P,Q,sing,fem,hum).
-n(entraîneur,P,Q,sing,masc,nhum).
-n(sélection,P,Q,sing,masc,nhum).
-n(crosse,P,Q,sing,fem,nhum).
-n(courbature,P,Q,sing,fem,nhum).
-n(tai-chi-chuan,P,Q,sing,masc,nhum).
-n(vitesse,P,Q,sing,fem,nhum).
-n(garde,P,Q,sing,fem,hum).
-n(amateur,P,Q,sing,masc,nhum).
-n(pie,P,Q,sing,fem,hum).
-n(rollerski,P,Q,sing,masc,nhum).
-n(juvénile,P,Q,sing,masc,nhum).
-n(règle,P,Q,sing,fem,nhum).
-n(pongiste,P,Q,sing,fem,nhum).
-n(vélocipède,P,Q,sing,masc,nhum).
-n(allégement,P,Q,sing,masc,nhum).
-n(Égypte,P,Q,sing,fem,nhum).
-n(tire-fesses,P,Q,plur,masc,hum).
-n(tricot,P,Q,sing,masc,nhum).
-n(toboggan,P,Q,sing,masc,hum).
-n(cochonnet,P,Q,sing,masc,hum).
-n(pilote,P,Q,sing,masc,hum).
-n(lancer,P,Q,sing,masc,nhum).
-n(résultats,P,Q,plur,masc,nhum).
-n(dribbleur,P,Q,sing,masc,nhum).
-n(deltaplane,P,Q,sing,masc,nhum).
-n(collé,P,Q,sing,masc,nhum).
-n(bicycle,P,Q,sing,masc,nhum).
-n(sourds,P,Q,plur,masc,nhum).
-n(gogue,P,Q,sing,masc,nhum).
-n(sage-femme,P,Q,sing,fem,hum).
-n(coupé,P,Q,sing,masc,nhum).
-n(bonheur,P,Q,sing,masc,hum).
-n(vacances,P,Q,plur,fem,nhum).
-n(latte,P,Q,sing,fem,nhum).
-n(butoir,P,Q,sing,masc,nhum).
-n(culbute,P,Q,sing,fem,nhum).
-n(podium,P,Q,sing,masc,nhum).
-n(canot,P,Q,sing,masc,hum).
-n(xyste,P,Q,sing,masc,nhum).
-n(danseuse,P,Q,sing,fem,hum).
-n(pion,P,Q,sing,masc,nhum).
-n(asthme,P,Q,sing,masc,nhum).
-n(épilation,P,Q,sing,fem,nhum).
-n(lad,P,Q,sing,masc,nhum).
-n(redoublement,P,Q,sing,masc,nhum).
-n(effort,P,Q,sing,masc,nhum).
-n(porche,P,Q,sing,masc,nhum).
-n(tac,P,Q,sing,masc,nhum).
-n(rivalité,P,Q,sing,fem,nhum).
-n(moringue,P,Q,sing,masc,nhum).
-n(skiff,P,Q,sing,masc,nhum).
-n(canoë,P,Q,sing,masc,nhum).
-n(sextuplé,P,Q,sing,masc,nhum).
-n(clapping,P,Q,sing,masc,nhum).
-n(trial,P,Q,sing,fem,nhum).
-n(appartenance,P,Q,sing,fem,nhum).
-n(canoraft,P,Q,sing,masc,nhum).
-n(nudité,P,Q,sing,fem,nhum).
-n(cinésiologie,P,Q,sing,fem,nhum).
-n(milieu,P,Q,sing,masc,nhum).
-n(sportives,P,Q,plur,fem,nhum).
-n(avancée,P,Q,sing,fem,nhum).
-n(exercices,P,Q,plur,masc,nhum).
-n(roulé-boulé,P,Q,sing,masc,nhum).
-n(potence,P,Q,sing,fem,nhum).
-n(ventrière,P,Q,sing,fem,nhum).
-n(joutes,P,Q,plur,fem,nhum).
-n(glisse,P,Q,sing,fem,nhum).
-n(parapente,P,Q,sing,masc,nhum).
-n(acrobates,P,Q,sing,masc,nhum).
-n(barragiste,P,Q,sing,masc,nhum).
-n(steeple,P,Q,sing,masc,nhum).
-n(rapide,P,Q,sing,masc,nhum).
-n(soule,P,Q,sing,fem,nhum).
-n(slackline,P,Q,sing,fem,nhum).
-n(juillet,P,Q,sing,masc,nhum).
-n(noblesse,P,Q,sing,fem,nhum).
-n(pénaliser,P,Q,sing,fem,nhum).
-n(contre-pointe,P,Q,sing,fem,nhum).
-n(lièvre,P,Q,sing,masc,hum).
-n(cowboy,P,Q,sing,masc,hum).
-n(fédération,P,Q,sing,fem,nhum).
-n(palestre,P,Q,sing,fem,nhum).
-n(nature,P,Q,sing,fem,hum).
-n(goalball,P,Q,sing,masc,nhum).
-n(porte,P,Q,sing,fem,nhum).
-n(infarctus,P,Q,plur,masc,nhum).
-n(soie,P,Q,sing,fem,nhum).
-n(moto-cross,P,Q,plur,masc,nhum).
-n(mercredi,P,Q,sing,masc,nhum).
-n(rowing,P,Q,sing,masc,nhum).
-n(adaptation,P,Q,sing,fem,nhum).
-n(revers,P,Q,plur,masc,nhum).
-n(hygiène,P,Q,sing,fem,hum).
-n(lob,P,Q,sing,masc,nhum).
-n(cendrée,P,Q,sing,fem,nhum).
-n(steppe,P,Q,sing,fem,nhum).
-n(feu,P,Q,sing,masc,hum).
-n(moule,P,Q,sing,fem,hum).
-n(meneur,P,Q,sing,masc,nhum).
-n(poteaux,P,Q,plur,masc,nhum).
-n(avantage,P,Q,sing,masc,nhum).
-n(stemm,P,Q,sing,masc,nhum).
-n(socquette,P,Q,sing,fem,nhum).
-n(thérapeute,P,Q,sing,fem,nhum).
-n(aïkido,P,Q,plur,masc,nhum).
-n(boiser,P,Q,sing,masc,nhum).
-n(gollot,P,Q,sing,masc,nhum).
-n(bride,P,Q,sing,fem,nhum).
-n(dos,P,Q,sing,masc,nhum).
-n(lancers,P,Q,plur,masc,nhum).
-n(sortie,P,Q,sing,fem,nhum).
-n(montagne,P,Q,sing,fem,hum).
-n(cyclotouriste,P,Q,sing,masc,nhum).
-n(double,P,Q,sing,masc,nhum).
-n(swing,P,Q,sing,masc,nhum).
-n(harnachement,P,Q,sing,masc,nhum).
-n(marche,P,Q,sing,fem,nhum).
-n(tireur,P,Q,sing,masc,nhum).
-n(véronique,P,Q,sing,fem,hum).
-n(embarcation,P,Q,sing,fem,nhum).
-n(entraineuse,P,Q,sing,fem,nhum).
-n(welsh,P,Q,sing,masc,nhum).
-n(monopalme,P,Q,sing,fem,nhum).
-n(panenka,P,Q,sing,fem,nhum).
-n(marinière,P,Q,sing,fem,nhum).
-n(supporters,P,Q,plur,fem,nhum).
-n(rugby,P,Q,sing,masc,nhum).
-n(fers,P,Q,plur,masc,nhum).
-n(surfwear,P,Q,sing,masc,nhum).
-n(pronateur,P,Q,sing,masc,nhum).
-n(amateur,P,Q,sing,fem,nhum).
-n(veine,P,Q,sing,fem,nhum).
-n(pelotari,P,Q,sing,masc,nhum).
-n(verrouillage,P,Q,sing,masc,nhum).
-n(salchow,P,Q,sing,masc,nhum).
-n(direct,P,Q,sing,masc,hum).
-n(olympisme,P,Q,sing,masc,nhum).
-n(corner,P,Q,sing,masc,nhum).
-n(vestiaire,P,Q,sing,masc,nhum).
-n(ponor,P,Q,sing,masc,nhum).
-n(k.o,P,Q,sing,masc,nhum).
-n(quadrille,P,Q,sing,fem,nhum).
-n(sicilien,P,Q,sing,masc,nhum).
-n(dépassement,P,Q,sing,masc,nhum).
-n(attaquant,P,Q,sing,masc,nhum).
-n(canne,P,Q,sing,fem,hum).
-n(dopeur,P,Q,sing,masc,nhum).
-n(sandow,P,Q,sing,masc,nhum).
-n(surface,P,Q,sing,fem,nhum).
-n(olympiades,P,Q,plur,fem,nhum).
-n(montants,P,Q,plur,masc,nhum).
-n(tauréador,P,Q,sing,masc,nhum).
-n(roller,P,Q,sing,masc,nhum).
-n(parade,P,Q,sing,fem,nhum).
-n(sourd,P,Q,sing,fem,nhum).
-n(sportifs,P,Q,plur,masc,nhum).
-n(manual,P,Q,sing,masc,nhum).
-n(darkslide,P,Q,sing,masc,nhum).
-n(kickflip,P,Q,sing,masc,nhum).
-n(ollie,P,Q,sing,masc,nhum).
-n(humaniste,P,Q,sing,fem,nhum).
-n(concours,P,Q,plur,masc,nhum).
-n(spores,P,Q,plur,fem,nhum).
-n(queue,P,Q,sing,fem,hum).
-n(charbon,P,Q,sing,masc,hum).
-n(autographe,P,Q,sing,masc,nhum).
-n(triplet,P,Q,sing,masc,nhum).
-n(cab,P,Q,sing,masc,nhum).
-n(nobles,P,Q,plur,fem,nhum).
-n(jazz,P,Q,plur,masc,nhum).
-n(poids-lourd,P,Q,sing,masc,nhum).
-n(parachutisme,P,Q,sing,masc,nhum).
-n(bowling,P,Q,sing,masc,nhum).
-n(clef,P,Q,sing,fem,nhum).
-n(repos,P,Q,plur,masc,nhum).
-n(puncheur,P,Q,sing,masc,nhum).
-n(sol,P,Q,sing,masc,nhum).
-n(anticipation,P,Q,sing,fem,nhum).
-n(conversion,P,Q,sing,fem,nhum).
-n(génuflexion,P,Q,sing,fem,nhum).
-n(mors,P,Q,plur,masc,nhum).
-n(courbatures,P,Q,plur,fem,nhum).
-n(sélectionné,P,Q,sing,masc,nhum).
-n(mésomorphe,P,Q,sing,masc,nhum).
-n(motard,P,Q,sing,masc,nhum).
-n(règles,P,Q,plur,fem,nhum).
-n(doigt,P,Q,sing,masc,nhum).
-n(arène,P,Q,sing,fem,nhum).
-n(footballeuse,P,Q,sing,fem,hum).
-n(massue,P,Q,sing,fem,nhum).
-n(training,P,Q,sing,masc,nhum).
-n(fête,P,Q,sing,fem,nhum).
-n(plume,P,Q,sing,fem,nhum).
-n(assiette,P,Q,sing,fem,hum).
-n(omnium,P,Q,sing,masc,hum).
-n(verrouilleur,P,Q,sing,masc,nhum).
-n(open,P,Q,sing,masc,nhum).
-n(poussinet,P,Q,sing,masc,nhum).
-n(entraîneuse,P,Q,sing,fem,nhum).
-n(slalom,P,Q,sing,masc,nhum).
-n(capacité,P,Q,sing,fem,nhum).
-n(marteau,P,Q,sing,masc,hum).
-n(brossage,P,Q,sing,masc,nhum).
-n(talonneur,P,Q,sing,masc,nhum).
-n(paratriathlon,P,Q,sing,masc,nhum).
-n(alpiniste,P,Q,sing,fem,hum).
-n(scratch,P,Q,sing,masc,nhum).
-n(matraqueur,P,Q,sing,masc,nhum).
-n(virevolte,P,Q,sing,fem,nhum).
-n(tête,P,Q,sing,fem,hum).
-n(demi-finale,P,Q,sing,fem,nhum).
-n(supporteurisme,P,Q,sing,masc,nhum).
-n(happelourde,P,Q,sing,fem,hum).
-n(automobile,P,Q,sing,fem,hum).
-n(gueulard,P,Q,sing,masc,hum).
-n(alpenstock,P,Q,sing,masc,nhum).
-n(ceste,P,Q,sing,masc,nhum).
-n(chasuble,P,Q,sing,fem,nhum).
-n(week-end,P,Q,sing,masc,nhum).
-n(frontflip,P,Q,sing,masc,nhum).
-n(vide,P,Q,sing,masc,hum).
-n(gouffre,P,Q,sing,masc,nhum).
-n(engagement,P,Q,sing,masc,nhum).
-n(golfeur,P,Q,sing,masc,hum).
-n(driver,P,Q,sing,masc,hum).
-n(balayage,P,Q,sing,masc,nhum).
-n(supporter,P,Q,sing,fem,nhum).
-n(ring,P,Q,sing,masc,nhum).
-n(ludisme,P,Q,sing,masc,nhum).
-n(quintaine,P,Q,sing,fem,nhum).
-n(cache-cou,P,Q,sing,masc,nhum).
-n(rugbyman,P,Q,sing,masc,nhum).
-n(licou,P,Q,sing,masc,hum).
-n(skier,P,Q,sing,masc,nhum).
-n(stand,P,Q,sing,masc,nhum).
-n(rythmique,P,Q,sing,fem,nhum).
-n(cardio-kickboxing,P,Q,sing,masc,nhum).
-n(cour,P,Q,sing,fem,hum).
-n(écuyer,P,Q,sing,masc,hum).
-n(yachtman,P,Q,sing,masc,nhum).
-n(natation,P,Q,sing,fem,hum).
-n(tunisien,P,Q,sing,masc,nhum).
-n(palanquée,P,Q,sing,fem,nhum).
-n(scrabble,P,Q,sing,masc,nhum).
-n(coronaropathies,P,Q,plur,fem,nhum).
-n(bois,P,Q,sing,masc,nhum).
-n(ascension,P,Q,sing,fem,nhum).
-n(olympiade,P,Q,sing,fem,nhum).
-n(chapelet,P,Q,sing,masc,nhum).
-n(titres,P,Q,plur,masc,nhum).
-n(rush,P,Q,sing,masc,nhum).
-n(karaté,P,Q,sing,masc,nhum).
-n(sous-barbe,P,Q,sing,fem,hum).
-n(association,P,Q,sing,fem,nhum).
-n(gendarmes,P,Q,plur,masc,nhum).
-n(cheval,P,Q,sing,masc,hum).
-n(flèche,P,Q,sing,fem,nhum).
-n(chrono,P,Q,sing,masc,nhum).
-n(happelourde,P,Q,sing,fem,nhum).
-n(cyclo-cross,P,Q,sing,masc,nhum).
-n(sumo,P,Q,plur,masc,nhum).
-n(dressage,P,Q,sing,masc,hum).
-n(floorball,P,Q,sing,masc,nhum).
-n(mentor,P,Q,sing,masc,nhum).
-n(poursuite,P,Q,sing,fem,nhum).
-n(stayer,P,Q,sing,masc,nhum).
-n(anatomie,P,Q,sing,fem,nhum).
-n(orange,P,Q,sing,fem,hum).
-n(poésie,P,Q,sing,fem,nhum).
-n(pilier,P,Q,sing,masc,nhum).
-n(discobole,P,Q,sing,fem,nhum).
-n(retournement,P,Q,sing,masc,nhum).
-n(satisfaction,P,Q,sing,fem,hum).
-n(bois,P,Q,plur,masc,hum).
-n(scout,P,Q,sing,masc,nhum).
-n(contre-la-montre,P,Q,sing,masc,nhum).
-n(carne,P,Q,sing,fem,nhum).
-n(décathlonien,P,Q,sing,masc,nhum).
-n(braquet,P,Q,sing,masc,nhum).
-n(hackamore,P,Q,sing,masc,hum).
-n(boucle,P,Q,sing,fem,nhum).
-n(rabat,P,Q,sing,masc,nhum).
-n(australiennes,P,Q,plur,fem,hum).
-n(prévôt,P,Q,sing,masc,nhum).
-n(gaule,P,Q,sing,fem,nhum).
-n(allure,P,Q,sing,fem,nhum).
-n(gagnant,P,Q,sing,masc,nhum).
-n(naginata,P,Q,sing,fem,nhum).
-n(quarté,P,Q,sing,masc,nhum).
-n(juré,P,Q,sing,masc,nhum).
-n(cartons,P,Q,plur,masc,nhum).
-n(pur-sang,P,Q,plur,masc,hum).
-n(playoff,P,Q,sing,masc,nhum).
-n(tocsin,P,Q,sing,masc,nhum).
-n(guidon,P,Q,sing,masc,nhum).
-n(saison,P,Q,sing,fem,nhum).
-n(véloski,P,Q,sing,masc,nhum).
-n(licol,P,Q,sing,masc,nhum).
-n(perte,P,Q,sing,fem,nhum).
-n(entre-deux,P,Q,plur,masc,nhum).
-n(kart,P,Q,sing,masc,nhum).
-n(danse,P,Q,sing,fem,nhum).
-n(haltérophilie,P,Q,sing,fem,nhum).
-n(cordes,P,Q,plur,fem,nhum).
-n(footballeur,P,Q,sing,masc,hum).
-n(passe-temps,P,Q,plur,masc,nhum).
-n(évaluation,P,Q,sing,fem,nhum).
-n(crack,P,Q,sing,masc,hum).
-n(brugnon,P,Q,sing,masc,hum).
-n(réclame,P,Q,sing,fem,nhum).
-n(poste,P,Q,sing,fem,nhum).
-n(délicoter,P,Q,sing,masc,nhum).
-n(palme,P,Q,sing,fem,nhum).
-n(gimmick,P,Q,sing,masc,nhum).
-n(banderille,P,Q,sing,fem,nhum).
-n(baseball,P,Q,sing,masc,nhum).
-n(spectateur,P,Q,sing,masc,hum).
-n(randonnée,P,Q,sing,fem,nhum).
-n(sabreur,P,Q,sing,masc,nhum).
-n(feinteur,P,Q,sing,masc,nhum).
-n(thermes,P,Q,plur,masc,nhum).
-n(surf,P,Q,sing,masc,nhum).
-n(hébertisme,P,Q,sing,masc,nhum).
-n(licenciés,P,Q,plur,masc,nhum).
-n(brider,P,Q,sing,fem,nhum).
-n(cyclotourisme,P,Q,sing,masc,nhum).
-n(passing-shot,P,Q,sing,masc,nhum).
-n(verge,P,Q,sing,fem,nhum).
-n(placage,P,Q,sing,masc,nhum).
-n(juré,P,Q,sing,masc,hum).
-n(jeté,P,Q,sing,masc,nhum).
-n(taxi,P,Q,sing,masc,nhum).
-n(dégagé,P,Q,sing,masc,hum).
-n(poteau,P,Q,sing,masc,nhum).
-n(skate,P,Q,sing,masc,nhum).
-n(pratique,P,Q,sing,fem,nhum).
-n(arme,P,Q,sing,fem,hum).
-n(inscription,P,Q,sing,fem,nhum).
-n(taekwondo,P,Q,plur,fem,nhum).
-n(puissance,P,Q,sing,fem,nhum).
-n(déchets,P,Q,plur,masc,nhum).
-n(amorti,P,Q,sing,masc,nhum).
-n(air,P,Q,sing,masc,nhum).
-n(décalage,P,Q,sing,masc,nhum).
-n(ouvreur,P,Q,sing,masc,nhum).
-n(poitrail,P,Q,sing,masc,nhum).
-n(avant-train,P,Q,sing,masc,nhum).
-n(roué,P,Q,sing,masc,nhum).
-n(joueur,P,Q,sing,masc,hum).
-n(États-Unis,P,Q,plur,masc,hum).
-n(navigation,P,Q,sing,fem,hum).
-n(chaîne,P,Q,sing,fem,nhum).
-n(zumba,P,Q,sing,fem,nhum).
-n(mer,P,Q,sing,fem,hum).
-n(boxer,P,Q,sing,masc,hum).
-n(groom,P,Q,sing,masc,nhum).
-n(carrousel,P,Q,sing,masc,nhum).
-n(home-trainer,P,Q,sing,masc,nhum).
-n(minijupe,P,Q,sing,fem,nhum).
-n(basketteur,P,Q,sing,masc,hum).
-n(grottes,P,Q,plur,fem,nhum).
-n(noir,P,Q,sing,masc,hum).
-n(panier,P,Q,sing,masc,nhum).
-n(écharpe,P,Q,sing,fem,nhum).
-n(tournois,P,Q,plur,masc,nhum).
-n(enlevage,P,Q,sing,masc,nhum).
-n(entier,P,Q,sing,masc,nhum).
-n(bookmaker,P,Q,sing,fem,nhum).
-n(hippodrome,P,Q,sing,masc,nhum).
-n(perdant,P,Q,sing,masc,nhum).
-n(licence,P,Q,sing,fem,nhum).
-n(division,P,Q,sing,fem,nhum).
-n(motonautisme,P,Q,sing,masc,hum).
-n(ozone,P,Q,sing,masc,nhum).
-n(blanc,P,Q,sing,masc,hum).
-n(marché,P,Q,sing,masc,hum).
-n(dojo,P,Q,sing,masc,nhum).
-n(résurgence,P,Q,sing,fem,hum).
-n(fatigue,P,Q,sing,fem,nhum).
-n(treiziste,P,Q,sing,fem,nhum).
-n(aéronautique,P,Q,sing,fem,nhum).
-n(running,P,Q,sing,masc,nhum).
-n(parachute,P,Q,sing,masc,nhum).
-n(patinage,P,Q,sing,masc,nhum).
-n(arpion,P,Q,sing,masc,nhum).
-n(engagement,P,Q,sing,masc,hum).
-n(hippomobile,P,Q,sing,masc,nhum).
-n(dragster,P,Q,sing,fem,nhum).
-n(corruption,P,Q,sing,fem,nhum).
-n(full-contact,P,Q,sing,masc,nhum).
-n(neige,P,Q,sing,fem,nhum).
-n(fanatique,P,Q,sing,fem,nhum).
-n(miracles,P,Q,plur,masc,nhum).
-n(extenseur,P,Q,sing,masc,nhum).
-n(collectif,P,Q,sing,masc,nhum).
-n(punching-ball,P,Q,sing,masc,nhum).
-n(mécène,P,Q,sing,fem,nhum).
-n(écurie,P,Q,sing,fem,hum).
-n(pénalty,P,Q,sing,masc,nhum).
-n(fifa,P,Q,sing,fem,nhum).
-n(avant,P,Q,sing,masc,nhum).
-n(manger,P,Q,sing,masc,hum).
-n(lift,P,Q,sing,masc,nhum).
-n(adaptabilité,P,Q,sing,fem,nhum).
-n(gymkhana,P,Q,sing,masc,nhum).
-n(escrime,P,Q,sing,fem,nhum).
-n(pommade,P,Q,sing,fem,nhum).
-n(balzane,P,Q,sing,fem,nhum).
-n(niveau,P,Q,sing,masc,nhum).
-n(échecs,P,Q,plur,masc,nhum).
-n(polo,P,Q,sing,masc,nhum).
-n(ligue,P,Q,sing,fem,nhum).
-n(lourd,P,Q,sing,masc,nhum).
-n(sportive,P,Q,sing,fem,nhum).
-n(forcing,P,Q,sing,masc,nhum).
-n(centre,P,Q,sing,masc,hum).
-n(brèche,P,Q,sing,fem,hum).
-n(luge,P,Q,sing,fem,nhum).
-n(sportivité,P,Q,sing,fem,nhum).
-n(ticheurte,P,Q,sing,masc,nhum).
-n(tee-shirt,P,Q,sing,masc,nhum).
-n(alpinisme,P,Q,sing,masc,nhum).
-n(lunette,P,Q,sing,fem,nhum).
-n(peton,P,Q,sing,masc,nhum).
-n(décontraction,P,Q,sing,fem,nhum).
-n(ragga,P,Q,sing,masc,nhum).
-n(passage,P,Q,sing,masc,nhum).
-n(dangereux,P,Q,sing,fem,nhum).
-n(chandelle,P,Q,sing,fem,hum).
-n(joggeuse,P,Q,sing,fem,hum).
-n(nageuse,P,Q,sing,fem,hum).
-n(frisbee,P,Q,sing,masc,nhum).
-n(kilo,P,Q,sing,masc,nhum).
-n(locomotive,P,Q,sing,fem,nhum).
-n(club-house,P,Q,sing,masc,nhum).
-n(planeur,P,Q,sing,masc,nhum).
-n(championne,P,Q,sing,fem,hum).
-n(décathlon,P,Q,sing,masc,nhum).
-n(volleyeur,P,Q,sing,masc,nhum).
-n(étalon,P,Q,sing,masc,hum).
-n(boccia,P,Q,sing,fem,nhum).
-n(avion,P,Q,sing,masc,nhum).
-n(joggeur,P,Q,sing,masc,nhum).
-n(affrontement,P,Q,sing,masc,nhum).
-n(hurling,P,Q,sing,masc,nhum).
-n(caddy,P,Q,sing,masc,nhum).
-n(parkour,P,Q,sing,masc,nhum).
-n(dacau,P,Q,sing,masc,nhum).
-n(netball,P,Q,sing,masc,nhum).
-n(eau,P,Q,sing,fem,hum).
-n(croquet,P,Q,sing,masc,nhum).
-n(renversement,P,Q,sing,masc,nhum).
-n(cabriole,P,Q,sing,fem,nhum).
-n(challengeur,P,Q,sing,masc,nhum).
-n(gazon,P,Q,sing,masc,hum).
-n(nautisme,P,Q,sing,masc,nhum).
-n(picorage,P,Q,sing,masc,nhum).
-n(précipice,P,Q,sing,masc,nhum).
-n(tifo,P,Q,sing,masc,nhum).
-n(triathlon,P,Q,sing,masc,nhum).
-n(appel,P,Q,sing,masc,nhum).
-n(antijeu,P,Q,sing,masc,nhum).
-n(bonification,P,Q,sing,fem,nhum).
-n(minuscules,P,Q,plur,fem,nhum).
-n(plongeoir,P,Q,sing,masc,nhum).
-n(compo,P,Q,sing,fem,nhum).
-n(vertical,P,Q,plur,masc,nhum).
-n(pugiliste,P,Q,sing,fem,nhum).
-n(chistera,P,Q,sing,masc,hum).
-n(prévôt,P,Q,sing,fem,nhum).
-n(boulodrome,P,Q,sing,masc,nhum).
-n(slalomeur,P,Q,sing,masc,nhum).
-n(bouche,P,Q,sing,fem,hum).
-n(float-tube,P,Q,sing,masc,nhum).
-n(starting-block,P,Q,sing,masc,nhum).
-n(cravache,P,Q,sing,fem,nhum).
-n(entraînement,P,Q,sing,masc,nhum).
-n(jogging,P,Q,sing,masc,nhum).
-n(cross-country,P,Q,sing,masc,nhum).
-n(anglo-arabe,P,Q,sing,masc,hum).
-n(emballement,P,Q,sing,masc,nhum).
-n(trotteur,P,Q,sing,masc,hum).
-n(coiffeur,P,Q,sing,masc,hum).
-n(hors-piste,P,Q,plur,masc,nhum).
-n(entraineur,P,Q,sing,masc,nhum).
-n(bridge,P,Q,sing,masc,nhum).
-n(exercice,P,Q,sing,masc,nhum).
-n(capoeira,P,Q,sing,fem,nhum).
-n(kyudo,P,Q,sing,masc,hum).
-n(dérailleur,P,Q,sing,masc,nhum).
-n(prix,P,Q,plur,masc,nhum).
-n(cerbère,P,Q,sing,masc,nhum).
-n(rafting,P,Q,sing,masc,nhum).
-n(calorie,P,Q,plur,masc,nhum).
-n(plancher,P,Q,sing,masc,hum).
-n(mêlé,P,Q,sing,masc,nhum).
-n(poules,P,Q,sing,fem,hum).
-n(débutante,P,Q,sing,fem,hum).
-n(poindre,P,Q,sing,masc,hum).
-n(châtié,P,Q,sing,masc,nhum).
-n(médailler,P,Q,sing,masc,nhum).
-n(réclamer,P,Q,sing,fem,hum).
-n(badine,P,Q,sing,masc,hum).
-n(para,P,Q,sing,fem,nhum).
-n(gagne,P,Q,plur,masc,hum).
-n(descendais,P,Q,sing,masc,nhum).
-n(piaffe,P,Q,sing,fem,hum).
-n(descendrait,P,Q,sing,masc,nhum).
-n(guides,P,Q,sing,masc,nhum).
-n(assoupli,P,Q,sing,fem,nhum).
-n(ébat,P,Q,sing,masc,hum).
-n(vaincu,P,Q,sing,fem,hum).
-n(servis,P,Q,sing,masc,nhum).
-n(randonner,P,Q,sing,masc,nhum).
-n(mesures,P,Q,sing,masc,nhum).
-n(espère,P,Q,sing,fem,hum).
-n(équerrer,P,Q,sing,masc,hum).
-n(fouler,P,Q,sing,fem,nhum).
-n(cravater,P,Q,sing,fem,hum).
-n(barrages,P,Q,sing,masc,nhum).
-n(coulée,P,Q,sing,fem,nhum).
-n(bringuer,P,Q,sing,fem,nhum).
-n(sabreuse,P,Q,sing,masc,nhum).
-n(sabrer,P,Q,sing,masc,nhum).
-n(trompes,P,Q,sing,masc,nhum).
-n(art,P,Q,sing,fem,hum).
-n(remontant,P,Q,sing,masc,hum).
-n(patine,P,Q,sing,masc,hum).
-n(feintée,P,Q,sing,masc,nhum).
-n(filer,P,Q,sing,masc,nhum).
-n(neiger,P,Q,sing,fem,nhum).
-n(passager,P,Q,sing,fem,hum).
-n(spatuler,P,Q,sing,masc,nhum).
-n(froissant,P,Q,sing,fem,nhum).
-n(prendre,P,Q,sing,fem,nhum).
-n(quintuplés,P,Q,sing,masc,hum).
-n(surprendre,P,Q,sing,fem,hum).
-n(aides,P,Q,sing,masc,nhum).
-n(mentors,P,Q,sing,masc,hum).
-n(dérobée,P,Q,sing,masc,hum).
-n(forte,P,Q,sing,masc,nhum).
-n(manie,P,Q,sing,fem,nhum).
-n(trotte,P,Q,sing,fem,hum).
-n(percussions,P,Q,sing,masc,nhum).
-n(tracer,P,Q,sing,masc,nhum).
-n(dominé,P,Q,sing,masc,hum).
-n(caparaçonné,P,Q,sing,masc,nhum).
-n(surentraîné,P,Q,sing,masc,nhum).
-n(briser,P,Q,sing,fem,nhum).
-n(hypnotiser,P,Q,plur,fem,nhum).
-n(pince,P,Q,sing,masc,nhum).
-n(aquaplaner,P,Q,sing,masc,nhum).
-n(sortir,P,Q,sing,fem,hum).
-n(handicapé,P,Q,sing,masc,hum).
-n(diverse,P,Q,sing,fem,nhum).
-n(disques,P,Q,sing,masc,nhum).
-n(pris,P,Q,sing,masc,hum).
-n(avancé,P,Q,sing,fem,hum).
-n(voiles,P,Q,sing,masc,nhum).
-n(routes,P,Q,sing,masc,nhum).
-n(retenu,P,Q,sing,masc,nhum).
-n(joute,P,Q,sing,fem,nhum).
-n(ouverts,P,Q,sing,masc,nhum).
-n(fortraitures,P,Q,sing,masc,nhum).
-n(brasser,P,Q,sing,masc,hum).
-n(lancé,P,Q,sing,fem,nhum).
-n(contrôlé,P,Q,sing,masc,nhum).
-n(épuisé,P,Q,sing,masc,nhum).
-n(piquant,P,Q,sing,fem,hum).
-n(bander,P,Q,sing,masc,nhum).
-n(claveter,P,Q,sing,fem,hum).
-n(points,P,Q,sing,fem,nhum).
-n(sueurs,P,Q,sing,masc,nhum).
-n(arènes,P,Q,sing,fem,nhum).
-n(longueurs,P,Q,sing,fem,nhum).
-n(traversés,P,Q,sing,masc,nhum).
-n(barres,P,Q,sing,fem,hum).
-n(jetée,P,Q,sing,masc,nhum).
-n(coter,P,Q,sing,masc,nhum).
-n(griser,P,Q,sing,masc,hum).
-n(cadrer,P,Q,sing,fem,hum).
-n(désarçonné,P,Q,sing,masc,nhum).
-n(miracle,P,Q,sing,masc,nhum).
-n(noirs,P,Q,sing,fem,nhum).
-n(chaussures,P,Q,sing,masc,nhum).
-n(contrée,P,Q,sing,masc,nhum).
-n(rushes,P,Q,sing,masc,hum).
-n(coiffé,P,Q,plur,masc,nhum).
-n(bloquant,P,Q,plur,masc,nhum).
-n(souler,P,Q,plur,masc,nhum).
-n(religieuse,P,Q,sing,fem,hum).
-n(gagnée,P,Q,sing,masc,nhum).
-n(baser,P,Q,sing,masc,nhum).
-n(pointer,P,Q,sing,fem,nhum).
-n(cocoter,P,Q,sing,masc,nhum).
-n(enroulée,P,Q,sing,masc,nhum).
-n(fêtes,P,Q,plur,masc,hum).
-n(slacks,P,Q,sing,masc,nhum).
-n(échauffe,P,Q,sing,fem,nhum).
-n(rama,P,Q,sing,masc,nhum).
-n(montagnes,P,Q,sing,masc,hum).
-n(étoiles,P,Q,sing,masc,nhum).
-n(latter,P,Q,sing,masc,nhum).
-n(avirons,P,Q,plur,fem,nhum).
-n(débuter,P,Q,sing,fem,nhum).
-n(puissances,P,Q,sing,masc,nhum).
-n(débridé,P,Q,sing,masc,nhum).
-n(aspergée,P,Q,sing,masc,nhum).
-n(pivotant,P,Q,sing,masc,hum).
-n(démarque,P,Q,sing,masc,nhum).
-n(consolant,P,Q,sing,masc,nhum).
-n(cendré,P,Q,sing,masc,nhum).
-n(arriver,P,Q,sing,masc,nhum).
-n(asperge,P,Q,sing,masc,nhum).
-n(redoubler,P,Q,sing,fem,nhum).
-n(gardes,P,Q,sing,fem,nhum).
-n(sifflé,P,Q,sing,masc,nhum).
-n(chevauchant,P,Q,sing,masc,nhum).
-n(moules,P,Q,sing,masc,nhum).
-n(mangeant,P,Q,sing,masc,nhum).
-n(relevée,P,Q,sing,masc,hum).
-n(forge,P,Q,sing,fem,nhum).
-n(boucher,P,Q,sing,fem,nhum).
-n(roulé,P,Q,sing,masc,hum).
-n(nuls,P,Q,sing,masc,nhum).
-n(paumer,P,Q,sing,masc,nhum).
-n(saccadé,P,Q,sing,fem,nhum).
-n(corné,P,Q,sing,fem,nhum).
-n(place,P,Q,sing,masc,hum).
-n(lancée,P,Q,sing,masc,nhum).
-n(handicapés,P,Q,sing,masc,nhum).
-n(quadriller,P,Q,sing,fem,nhum).
-n(bottée,P,Q,sing,masc,hum).
-n(fêter,P,Q,sing,fem,nhum).
-n(bouler,P,Q,sing,masc,nhum).
-n(pratiqué,P,Q,sing,masc,nhum).
-n(servi,P,Q,sing,masc,hum).
-n(tire,P,Q,sing,masc,nhum).
-n(archère,P,Q,sing,fem,nhum).
-n(skiassent,P,Q,sing,masc,nhum).
-n(droites,P,Q,sing,masc,nhum).
-n(immobilisé,P,Q,sing,masc,nhum).
-n(percher,P,Q,sing,masc,nhum).
-n(courant,P,Q,sing,masc,nhum).
-n(toquard,P,Q,sing,masc,nhum).
-n(kapos,P,Q,sing,fem,nhum).
-n(buté,P,Q,sing,fem,nhum).
+% n(sifflet,P,Q,sing,masc,nhum).
+% n(sauvetage,P,Q,sing,masc,nhum).
+% n(cycliste,P,Q,sing,fem,hum).
+% n(barre,P,Q,sing,fem,nhum).
+% n(blocage,P,Q,sing,masc,nhum).
+% n(plot,P,Q,sing,masc,nhum).
+% n(gant,P,Q,sing,masc,nhum).
+% n(aller-retour,P,Q,plur,masc,nhum).
+% n(arrêt,P,Q,sing,masc,nhum).
+% n(sportif,P,Q,sing,masc,hum).
+% n(filets,P,Q,plur,masc,nhum).
+% n(motocyclisme,P,Q,sing,masc,nhum).
+% n(streetball,P,Q,sing,masc,nhum).
+% n(pelouse,P,Q,sing,masc,nhum).
+% n(set,P,Q,sing,masc,nhum).
+% n(témoin,P,Q,sing,masc,nhum).
+% n(tremplin,P,Q,sing,masc,nhum).
+% n(basket-ball,P,Q,sing,masc,nhum).
+% n(moto-neige,P,Q,sing,fem,nhum).
+% n(force,P,Q,sing,fem,nhum).
+% n(compétition,P,Q,sing,fem,nhum).
+% n(sprinteur,P,Q,sing,masc,hum).
+% n(trampoline,P,Q,sing,masc,nhum).
+% n(salle,P,Q,sing,fem,nhum).
+% n(club,P,Q,sing,masc,nhum).
+% n(ligne,P,Q,sing,fem,nhum).
+% n(handicap,P,Q,sing,masc,nhum).
+% n(course,P,Q,sing,fem,nhum).
+% n(discipline,P,Q,sing,fem,nhum).
+% n(handisport,P,Q,sing,fem,nhum).
+% n(kenjutsu,P,Q,sing,masc,nhum).
+% n(voile,P,Q,sing,fem,nhum).
+% n(pencak-silat,P,Q,sing,masc,nhum).
+% n(mesure,P,Q,sing,fem,nhum).
+% n(chandelle,P,Q,sing,fem,nhum).
+% n(traîneaux,P,Q,plur,masc,nhum).
+% n(extérieur,P,Q,sing,masc,nhum).
+% n(nageurs,P,Q,plur,masc,hum).
+% n(hockeyeur,P,Q,sing,masc,hum).
+% n(rétablissement,P,Q,sing,masc,nhum).
+% n(quad,P,Q,sing,masc,nhum).
+% n(contre-attaque,P,Q,sing,fem,nhum).
+% n(annonceur,P,Q,sing,masc,nhum).
+% n(moulinet,P,Q,sing,masc,nhum).
+% n(squash,P,Q,sing,masc,nhum).
+% n(contrôle,P,Q,sing,masc,nhum).
+% n(muscle,P,Q,sing,masc,nhum).
+% n(ligue,P,Q,sing,fem,nhum).
+% n(haie,P,Q,sing,fem,nhum).
+% n(escalade,P,Q,sing,fem,nhum).
+% n(coup,P,Q,sing,masc,nhum).
+% n(jeux,P,Q,plur,masc,nhum).
+% n(gonflette,P,Q,sing,fem,nhum).
+% n(franchise,P,Q,sing,fem,nhum).
+% n(plaisance,P,Q,sing,fem,nhum).
+% n(karatéka,P,Q,sing,masc,hum).
+% n(tractions,P,Q,plur,fem,nhum).
+% n(protège-dents,P,Q,plur,masc,nhum).
+% n(botte,P,Q,sing,fem,nhum).
+% n(ski,P,Q,sing,masc,nhum).
+% n(pince-nez,P,Q,sing,masc,nhum).
+% n(défenseur,P,Q,sing,masc,hum).
+% n(buteur,P,Q,sing,masc,hum).
+% n(piste,P,Q,sing,fem,nhum).
+% n(patin,P,Q,sing,masc,nhum).
+% n(virage,P,Q,sing,masc,nhum).
+% n(gants,P,Q,plur,masc,nhum).
+% n(pressing,P,Q,sing,masc,nhum).
+% n(record,P,Q,sing,masc,nhum).
+% n(gauche,P,Q,sing,masc,nhum).
+% n(poids,P,Q,plur,masc,nhum).
+% n(karting,P,Q,sing,masc,nhum).
+% n(rallye,P,Q,sing,masc,nhum).
+% n(palet,P,Q,sing,masc,nhum).
+% n(box,P,Q,sing,masc,nhum).
+% n(classement,P,Q,sing,masc,nhum).
+% n(grimpeur,P,Q,sing,masc,hum).
+% n(débutant,P,Q,sing,masc,hum).
+% n(mouvement,P,Q,sing,masc,nhum).
+% n(anneaux,P,Q,plur,masc,nhum).
+% n(chasse,P,Q,sing,fem,nhum).
+% n(filet,P,Q,sing,masc,hum).
+% n(foot,P,Q,sing,masc,nhum).
+% n(compétiteur,P,Q,sing,masc,hum).
+% n(lutteur,P,Q,sing,masc,hum).
+% n(jury,P,Q,sing,masc,hum).
+% n(judo,P,Q,sing,masc,nhum).
+% n(médaille,P,Q,sing,fem,nhum).
+% n(archer,P,Q,sing,masc,hum).
+% n(arbitrage,P,Q,sing,masc,nhum).
+% n(juge,P,Q,sing,masc,hum).
+% n(note,P,Q,sing,fem,nhum).
+% n(triche,P,Q,sing,fem,nhum).
+% n(endurance,P,Q,sing,fem,nhum).
+% n(pétanque,P,Q,sing,fem,nhum).
+% n(chaussure,P,Q,sing,fem,hum).
+% n(challenger,P,Q,sing,masc,hum).
+% n(équipe,P,Q,sing,fem,nhum).
+% n(médaille,P,Q,sing,fem,nhum).
+% n(funboard,P,Q,sing,masc,hum).
+% n(touche,P,Q,sing,fem,nhum).
+% n(maître-nageur,P,Q,sing,masc,hum).
+% n(étirement,P,Q,sing,masc,nhum).
+% n(parachutiste,P,Q,sing,fem,hum).
+% n(ace,P,Q,sing,masc,nhum).
+% n(compétence,P,Q,sing,fem,nhum).
+% n(perche,P,Q,sing,fem,nhum).
+% n(kitesurf,P,Q,sing,masc,nhum).
+% n(vainqueur,P,Q,sing,masc,hum).
+% n(interdit,P,Q,sing,masc,nhum).
+% n(rotation,P,Q,sing,fem,nhum).
+% n(finale,P,Q,sing,fem,nhum).
+% n(mêlée,P,Q,sing,fem,nhum).
+% n(cavalier,P,Q,sing,masc,hum).
+% n(judoka,P,Q,sing,fem,hum).
+% n(victoire,P,Q,sing,fem,nhum).
+% n(international,P,Q,sing,masc,nhum).
+% n(provocation,P,Q,sing,fem,nhum).
+% n(coaching,P,Q,sing,masc,nhum).
+% n(poulain,P,Q,sing,masc,hum).
+% n(porter,P,Q,sing,masc,nhum).
+% n(aïkidoka,P,Q,sing,masc,hum).
+% n(dameuse,P,Q,sing,fem,nhum).
+% n(gymnase,P,Q,sing,masc,nhum).
+% n(poudreuse,P,Q,sing,fem,nhum).
+% n(centre,P,Q,sing,masc,nhum).
+% n(physique,P,Q,sing,masc,nhum).
+% n(adversaire,P,Q,sing,masc,hum).
+% n(manager,P,Q,sing,masc,hum).
+% n(jonglage,P,Q,sing,masc,nhum).
+% n(hors-jeu,P,Q,plur,masc,nhum).
+% n(hockey,P,Q,sing,masc,nhum).
+% n(volant,P,Q,sing,masc,nhum).
+% n(performance,P,Q,sing,fem,nhum).
+% n(transfert,P,Q,sing,masc,nhum).
+% n(joueur,P,Q,sing,masc,hum).
+% n(bodybuilder,P,Q,sing,masc,hum).
+% n(épreuve,P,Q,sing,fem,nhum).
+% n(réception,P,Q,sing,fem,nhum).
+% n(formation,P,Q,sing,fem,nhum).
+% n(arrivée,P,Q,sing,fem,nhum).
+% n(beach-volley,P,Q,sing,masc,nhum).
+% n(kayakiste,P,Q,sing,fem,hum).
+% n(tacle,P,Q,sing,masc,nhum).
+% n(équipier,P,Q,sing,masc,hum).
+% n(handball,P,Q,sing,masc,nhum).
+% n(semi-marathon,P,Q,sing,masc,nhum).
+% n(remplaçant,P,Q,sing,masc,hum).
+% n(qualification,P,Q,sing,fem,nhum).
+% n(tango,P,Q,sing,masc,nhum).
+% n(poirier,P,Q,sing,masc,nhum).
+% n(moniteur,P,Q,sing,masc,hum).
+% n(professionnel,P,Q,sing,masc,hum).
+% n(disqualification,P,Q,sing,fem,nhum).
+% n(supportrice,P,Q,sing,fem,hum).
+% n(acrobates,P,Q,plur,masc,hum).
+% n(arc,P,Q,sing,masc,nhum).
+% n(athlète,P,Q,sing,fem,hum).
+% n(entraîneur,P,Q,sing,masc,hum).
+% n(sélection,P,Q,sing,fem,nhum).
+% n(crosse,P,Q,sing,fem,nhum).
+% n(courbature,P,Q,sing,fem,nhum).
+% n(vitesse,P,Q,sing,fem,nhum).
+% n(amateur,P,Q,sing,masc,hum).
+% n(règle,P,Q,sing,fem,nhum).
+% n(pongiste,P,Q,sing,fem,hum).
+% n(cochonnet,P,Q,sing,masc,nhum).
+% n(pilote,P,Q,sing,masc,hum).
+% n(lancer,P,Q,sing,masc,nhum).
+% n(résultats,P,Q,plur,masc,nhum).
+% n(dribbleur,P,Q,sing,masc,nhum).
+% n(deltaplane,P,Q,sing,masc,nhum).
+% n(bicycle,P,Q,sing,masc,nhum).
+% n(podium,P,Q,sing,masc,nhum).
+% n(canot,P,Q,sing,masc,nhum).
+% n(danseuse,P,Q,sing,fem,hum).
+% n(asthme,P,Q,sing,masc,nhum).
+% n(effort,P,Q,sing,masc,nhum).
+% n(rivalité,P,Q,sing,fem,nhum).
+% n(canoë,P,Q,sing,masc,nhum).
+% n(clapping,P,Q,sing,masc,nhum).
+% n(milieu,P,Q,sing,masc,nhum).
+% n(sportives,P,Q,plur,fem,hum).
+% n(exercices,P,Q,plur,masc,nhum).
+% n(parapente,P,Q,sing,masc,nhum).
+% n(acrobate,P,Q,sing,masc,hum).
+% n(fédération,P,Q,sing,fem,nhum).
+% n(moto-cross,P,Q,plur,masc,nhum).
+% n(revers,P,Q,plur,masc,nhum).
+% n(lob,P,Q,sing,masc,nhum).
+% n(meneur,P,Q,sing,masc,hum).
+% n(poteaux,P,Q,plur,masc,nhum).
+% n(avantage,P,Q,sing,masc,nhum).
+% n(aïkido,P,Q,plur,masc,nhum).
+% n(dos,P,Q,sing,masc,nhum).
+% n(lancers,P,Q,plur,masc,nhum).
+% n(sortie,P,Q,sing,fem,nhum).
+% n(montagne,P,Q,sing,fem,hum).
+% n(marche,P,Q,sing,fem,nhum).
+% n(tireur,P,Q,sing,masc,hum).
+% n(entraineuse,P,Q,sing,fem,hum).
+% n(panenka,P,Q,sing,fem,nhum).
+% n(supporteurs,P,Q,plur,masc,hum).
+% n(rugby,P,Q,sing,masc,nhum).
+% n(amateur,P,Q,sing,fem,hum).
+% n(corner,P,Q,sing,masc,nhum).
+% n(vestiaire,P,Q,sing,masc,nhum).
+% n(attaquant,P,Q,sing,masc,hum).
+% n(surface,P,Q,sing,fem,nhum).
+% n(olympiades,P,Q,plur,fem,nhum).
+% n(montants,P,Q,plur,masc,nhum).
+% n(toréador,P,Q,sing,masc,hum).
+% n(roller,P,Q,sing,masc,nhum).
+% n(parade,P,Q,sing,fem,nhum).
+% n(sportifs,P,Q,plur,masc,hum).
+% n(concours,P,Q,plur,masc,nhum).
+% n(parachutisme,P,Q,sing,masc,nhum).
+% n(bowling,P,Q,sing,masc,nhum).
+% n(repos,P,Q,sing,masc,nhum).
+% n(anticipation,P,Q,sing,fem,nhum).
+% n(courbatures,P,Q,plur,fem,nhum).
+% n(règles,P,Q,plur,fem,nhum).
+% n(arène,P,Q,sing,fem,nhum).
+% n(footballeuse,P,Q,sing,fem,hum).
+% n(entraîneuse,P,Q,sing,fem,hum).
+% n(slalom,P,Q,sing,masc,nhum).
+% n(talonneur,P,Q,sing,masc,hum).
+% n(paratriathlon,P,Q,sing,masc,nhum).
+% n(alpiniste,P,Q,sing,fem,hum).
+% n(demi-finale,P,Q,sing,fem,nhum).
+% n(automobile,P,Q,sing,fem,nhum).
+% n(chasuble,P,Q,sing,fem,nhum).
+% n(week-end,P,Q,sing,masc,nhum).
+% n(frontflip,P,Q,sing,masc,nhum).
+% n(engagement,P,Q,sing,masc,nhum).
+% n(golfeur,P,Q,sing,masc,hum).
+% n(balayage,P,Q,sing,masc,nhum).
+% n(supporteur,P,Q,sing,masc,hum).
+% n(cache-cou,P,Q,sing,masc,nhum).
+% n(rugbyman,P,Q,sing,masc,hum).
+% n(skieur,P,Q,sing,masc,hum).
+% n(natation,P,Q,sing,fem,nhum).
+% n(ascension,P,Q,sing,fem,nhum).
+% n(olympiade,P,Q,sing,fem,nhum).
+% n(karaté,P,Q,sing,masc,nhum).
+% n(cheval,P,Q,sing,masc,hum).
+% n(flèche,P,Q,sing,fem,nhum).
+% n(chrono,P,Q,sing,masc,nhum).
+% n(cyclo-cross,P,Q,sing,masc,nhum).
+% n(sumo,P,Q,plur,masc,hum).
+% n(pilier,P,Q,sing,masc,hum).
+% n(contre-la-montre,P,Q,sing,masc,nhum).
+% n(décathlonien,P,Q,sing,masc,hum).
+% n(gagnant,P,Q,sing,masc,nhum).
+% n(cartons,P,Q,plur,masc,nhum).
+% n(playoffs,P,Q,plur,masc,nhum).
+% n(guidon,P,Q,sing,masc,nhum).
+% n(saison,P,Q,sing,fem,nhum).
+% n(kart,P,Q,sing,masc,nhum).
+% n(danse,P,Q,sing,fem,nhum).
+% n(haltérophilie,P,Q,sing,fem,nhum).
+% n(footballeur,P,Q,sing,masc,hum).
+% n(palme,P,Q,sing,fem,nhum).
+% n(baseball,P,Q,sing,masc,nhum).
+% n(spectateur,P,Q,sing,masc,hum).
+% n(randonnée,P,Q,sing,fem,nhum).
+% n(surf,P,Q,sing,masc,nhum).
+% n(licenciés,P,Q,plur,masc,hum).
+% n(cyclotourisme,P,Q,sing,masc,nhum).
+% n(poteau,P,Q,sing,masc,nhum).
+% n(skate,P,Q,sing,masc,nhum).
+% n(pratique,P,Q,sing,fem,nhum).
+% n(taekwondo,P,Q,sing,masc,nhum).
+% n(amorti,P,Q,sing,masc,nhum).
+% n(joueur,P,Q,sing,masc,hum).
+% n(navigation,P,Q,sing,fem,nhum).
+% n(zumba,P,Q,sing,fem,nhum).
+% n(boxeur,P,Q,sing,masc,hum).
+% n(home-trainer,P,Q,sing,masc,nhum).
+% n(basketteur,P,Q,sing,masc,hum).
+% n(tournois,P,Q,plur,masc,nhum).
+% n(hippodrome,P,Q,sing,masc,nhum).
+% n(perdant,P,Q,sing,masc,nhum).
+% n(fatigue,P,Q,sing,fem,nhum).
+% n(parachute,P,Q,sing,masc,nhum).
+% n(patinage,P,Q,sing,masc,nhum).
+% n(engagement,P,Q,sing,masc,hum).
+% n(dragster,P,Q,sing,masc,nhum).
+% n(collectif,P,Q,sing,masc,nhum).
+% n(punching-ball,P,Q,sing,masc,nhum).
+% n(écurie,P,Q,sing,fem,nhum).
+% n(pénalty,P,Q,sing,masc,nhum).
+% n(escrime,P,Q,sing,fem,nhum).
+% n(niveau,P,Q,sing,masc,nhum).
+% n(échecs,P,Q,plur,masc,nhum).
+% n(polo,P,Q,sing,masc,nhum).
+% n(ligue,P,Q,sing,fem,nhum).
+% n(sportive,P,Q,sing,fem,nhum).
+% n(centre,P,Q,sing,masc,hum).
+% n(luge,P,Q,sing,fem,nhum).
+% n(chandelle,P,Q,sing,fem,nhum).
+% n(joggeuse,P,Q,sing,fem,hum).
+% n(nageuse,P,Q,sing,fem,hum).
+% n(frisbee,P,Q,sing,masc,nhum).
+% n(club-house,P,Q,sing,masc,nhum).
+% n(planeur,P,Q,sing,masc,nhum).
+% n(championne,P,Q,sing,fem,hum).
+% n(décathlon,P,Q,sing,masc,nhum).
+% n(joggeur,P,Q,sing,masc,hum).
+% n(gazon,P,Q,sing,masc,nhum).
+% n(tifo,P,Q,sing,masc,nhum).
+% n(triathlon,P,Q,sing,masc,nhum).
+% n(plongeoir,P,Q,sing,masc,nhum).
+% n(chistera,P,Q,sing,fem,nhum).
+% n(boulodrome,P,Q,sing,masc,nhum).
+% n(starting-block,P,Q,sing,masc,nhum).
+% n(entraînement,P,Q,sing,masc,nhum).
+% n(jogging,P,Q,sing,masc,nhum).
+% n(hors-piste,P,Q,plur,masc,nhum).
+% n(entraineur,P,Q,sing,masc,hum).
+% n(bridge,P,Q,sing,masc,nhum).
+% n(exercice,P,Q,sing,masc,nhum).
+% n(capoeira,P,Q,sing,fem,nhum).
+% n(prix,P,Q,sing,masc,nhum).
+% n(rafting,P,Q,sing,masc,nhum).
+% n(voiles,P,Q,plur,fem,nhum).
+% n(lancé,P,Q,sing,fem,nhum).
+% n(arènes,P,Q,plur,fem,nhum).
+% n(chaussures,P,Q,sing,masc,nhum).
+% n(arrivée,P,Q,sing,fem,nhum).
+% n(place,P,Q,sing,fem,hum).
+% n(lancer,P,Q,sing,masc,nhum).
+% n(tir,P,Q,sing,masc,nhum).
+% n(archère,P,Q,sing,fem,hum).
 
 np(Porsche,P,Q,sing,fem,nhum).
-np(Contre,P,Q,sing,masc,nhum).
-np(Pato,P,Q,sing,masc,nhum).
-np(Ferrero,P,Q,sing,masc,hum).
 np(NFL,P,Q,sing,masc,nhum).
-np(TREC,P,Q,sing,fem,nhum).
-np(Bercy,P,Q,sing,masc,nhum).
 np(Puma,P,Q,sing,masc,nhum).
-np(Belgique,P,Q,sing,fem,nhum).
-np(Genesis,P,Q,sing,fem,nhum).
-np(Grèce,P,Q,sing,fem,nhum).
-np(Golf,P,Q,sing,fem,nhum).
-np(BCT,P,Q,sing,fem,nhum).
-np(Ferrari,P,Q,sing,fem,nhum).
-np(Taxi,P,Q,sing,masc,nhum).
-np(JO,P,Q,sing,masc,nhum).
-np(Olympie,P,Q,sing,fem,hum).
-np(Dioclès,P,Q,plur,masc,hum).
-np(Saint-Maurice,P,Q,sing,masc,nhum).
-np(Montblanais,P,Q,sing,masc,hum).
-np(Ballesteros,P,Q,sing,fem,nhum).
-np(X-board,P,Q,sing,masc,nhum).
-np(Loulou,P,Q,sing,fem,hum).
-np(Tunisie,P,Q,sing,fem,nhum).
-np(Groland,P,Q,sing,masc,nhum).
-np(T-shirt,P,Q,sing,masc,nhum).
-np(KO,P,Q,sing,masc,nhum).
-np(Wii,P,Q,sing,fem,nhum).
-np(Sol,P,Q,sing,masc,hum).
-np(Australie,P,Q,sing,fem,nhum).
-np(Barbidur,P,Q,sing,fem,nhum).
-np(Barbidou,P,Q,sing,masc,nhum).
-np(Galatasaray,P,Q,sing,masc,nhum).
-np(Grande-Bretagne,P,Q,sing,fem,hum).
-np(Espagne,P,Q,sing,fem,hum).
-np(Noblesse,P,Q,sing,fem,nhum).
-np(Nike,P,Q,sing,fem,nhum).
-np(Royaume-Uni,P,Q,sing,masc,hum).
-np(Brooks,P,Q,sing,masc,nhum).
-np(France,P,Q,sing,masc,hum).
-np(BMX,P,Q,sing,masc,nhum).
-np(Mai,P,Q,sing,fem,hum).
-np(Canal+,P,Q,sing,masc,nhum).
-np(Bastia,P,Q,sing,masc,nhum).
-np(Angleterre,P,Q,sing,fem,hum).
-np(Jorkyball,P,Q,sing,masc,nhum).
-np(ULM,P,Q,sing,masc,nhum).
-np(Tinker,P,Q,sing,masc,hum).
-np(Ballon,P,Q,sing,masc,nhum).
-np(Allemagne,P,Q,sing,fem,nhum).
-np(Monnaie,P,Q,sing,masc,nhum).
-np(Jazz,P,Q,sing,masc,hum).
-np(Manche,P,Q,sing,fem,nhum).
-np(Inde,P,Q,sing,fem,nhum).
-np(Chasse,P,Q,sing,masc,nhum).
-np(Sicile,P,Q,sing,fem,nhum).
-np(Florence,P,Q,sing,fem,hum).
-np(Brive-la-Gaillarde,P,Q,sing,masc,nhum).
-np(CSO,P,Q,sing,masc,nhum).
-np(Asie,P,Q,sing,fem,nhum).
-np(Nouvelle-Angleterre,P,Q,sing,fem,nhum).
-np(Canada,P,Q,sing,masc,nhum).
-np(Discobole,P,Q,plur,masc,nhum).
-np(Mars,P,Q,sing,fem,hum).
-np(Hewitt,P,Q,sing,masc,nhum).
-np(Toronto,P,Q,sing,masc,nhum).
-np(Roland-Garros,P,Q,sing,masc,nhum).
-np(Péloponnèse,P,Q,sing,masc,nhum).
-np(Surf,P,Q,sing,masc,nhum).
-np(Brennus,P,Q,sing,masc,nhum).
-np(Monopoly,P,Q,sing,masc,nhum).
-np(Transition,P,Q,sing,masc,nhum).
-np(Panthéon,P,Q,sing,masc,nhum).
-np(Rome,P,Q,sing,masc,nhum).
-np(Europe,P,Q,sing,fem,hum).
-np(Renaissance,P,Q,sing,fem,nhum).
-np(Suisse,P,Q,sing,fem,hum).
-np(Wimbledon,P,Q,sing,masc,nhum).
-np(Italie,P,Q,sing,masc,nhum).
-np(Powerball,P,Q,sing,masc,nhum).
-np(Euro,P,Q,sing,masc,nhum).
-np(Spyder,P,Q,sing,masc,nhum).
-np(Calmann-Lévy,P,Q,sing,fem,hum).
-np(Centre,P,Q,sing,masc,nhum).
-np(Rouge,P,Q,sing,masc,nhum).
-np(Flore,P,Q,sing,fem,hum).
-np(Occident,P,Q,sing,masc,nhum).
-np(Chadwick,P,Q,sing,masc,nhum).
-np(Touch,P,Q,sing,masc,nhum).
-np(IDM,P,Q,sing,masc,nhum).
-np(Noble,P,Q,sing,masc,nhum).
-np(Solon,P,Q,sing,masc,hum).
-np(F1,P,Q,sing,fem,nhum).
-np(Paris,P,Q,sing,masc,hum).
-np(Fosbury-flop,P,Q,sing,masc,nhum).
-np(Pakistan,P,Q,sing,masc,nhum).
-np(Cabinda,P,Q,sing,masc,nhum).
-np(Poulidor,P,Q,sing,masc,hum).
-np(Monaco,P,Q,sing,masc,nhum).
-np(Marche,P,Q,sing,fem,nhum).
-np(Londres,P,Q,sing,masc,nhum).
-np(Sokol,P,Q,sing,masc,nhum).
-np(Amos,P,Q,sing,masc,hum).
-np(Junior,P,Q,sing,masc,hum).
-np(JO,P,Q,plur,fem,nhum).
+% np(Belgique,P,Q,sing,fem,nhum).
+% np(Grèce,P,Q,sing,fem,nhum).
+% np(Ferrari,P,Q,sing,fem,nhum).
+% np(Tunisie,P,Q,sing,fem,nhum).
+% np(Australie,P,Q,sing,fem,nhum).
+% np(Galatasaray,P,Q,sing,masc,nhum).
+% % np(Grande-Bretagne,P,Q,sing,fem,hum).
+% np(Espagne,P,Q,sing,fem,hum).
+% np(Nike,P,Q,sing,fem,nhum).
+% % np(Royaume-Uni,P,Q,sing,masc,hum).
+% np(France,P,Q,sing,masc,hum).
+% np(BMX,P,Q,sing,masc,nhum).
+% np(Bastia,P,Q,sing,masc,nhum).
+% np(Angleterre,P,Q,sing,fem,hum).
+% np(ULM,P,Q,sing,masc,nhum).
+% np(Allemagne,P,Q,sing,fem,nhum).
+% np(Inde,P,Q,sing,fem,nhum).
+% np(Canada,P,Q,sing,masc,nhum).
+% % np(Roland-Garros,P,Q,sing,masc,nhum).
+% np(Brennus,P,Q,sing,masc,nhum).
+% np(Panthéon,P,Q,sing,masc,nhum).
+% np(Europe,P,Q,sing,fem,hum).
+% np(Suisse,P,Q,sing,fem,hum).
+% np(Wimbledon,P,Q,sing,masc,nhum).
+% np(Italie,P,Q,sing,masc,nhum).
+% np(F1,P,Q,sing,fem,nhum).
+% np(Paris,P,Q,sing,masc,hum).
+% % np(Fosbury-flop,P,Q,sing,masc,nhum).
+% np(Pakistan,P,Q,sing,masc,nhum).
+% np(Poulidor,P,Q,sing,masc,hum).
+% np(Monaco,P,Q,sing,masc,nhum).
+% np(Londres,P,Q,sing,masc,nhum).
+% np(JO,P,Q,plur,fem,nhum).

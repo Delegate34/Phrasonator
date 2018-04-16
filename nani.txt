@@ -1,0 +1,120 @@
+t abandonne abandonnent hum X
+t accélère accèlerent X X
+t admire admirent hum X
+t affronte affrontent hum hum
+t aide aident hum hum
+t aime aiment hum nhum
+t ajoute ajoutent hum X
+i va vont hum
+t améliore améliorent hum nhum
+t amortit amortissent hum nhum
+t applaudit applaudissent hum hum
+X arrête arrêtent hum X
+t arrive arrivent hum nhum
+t attaque attaquent hum X
+t attrape attrapent hum X
+X avance avancent hum nhum
+t a ont hum nhum
+i appartient appartiennent nhum hum
+X danse dansent hum nhum
+t défend défendent hum X
+t défie défient hum hum
+X dégage dégagent hum X
+X démarre démarrent hum nhum
+X dévie dévient X X
+t dope dopent hum hum
+i dort dorment hum
+t doit doivent hum X
+t dit disent hum nhum
+t dispute disputent hum hum
+t domine dominent hum X
+X donne donnent hum nhum
+i hésite hésitent hum
+t humilie humilient hum nhum
+t jette jettent hum nhum
+t jongle jonglent hum nhum
+X joue jouent hum nhum
+X lâche lâchent hum nhum
+t lance lancent hum nhum
+X loupe loupent hum nhum
+i nage nagent hum
+i navigue naviguent hum
+i provient proviennent hum
+t protège protègent hum nhum
+i progresse progressent hum
+X prend prennent hum X
+t pratique pratiquent hum nhum
+X plonge plongent hum
+X perd perdent hum X
+i part partent hum
+i participe participent hum
+i parle parlent hum
+t recrute recrutent hum hum
+t rejoint rejoignent hum X
+t remplace remplacent hum hum
+t remporte remportent hum nhum
+t rencontre rencontrent hum hum
+t respecte respectent hum hum
+t utilise utilisent hum nhum
+t saisit saisissent hum nhum
+t salue saluent hum hum
+i saute sautent hum
+t sélectionne sélectionnent hum X
+X siffle sifflent hum hum
+i skie skient hum
+t soigne soignent hum hum
+X sort sortent hum nhum
+X stoppe stoppent hum X
+i sue suent hum
+X suit suivent hum hum
+
+X bat battent hum hum
+t blesse blessent hum hum
+t bloque bloquent X Y
+t boit boivent hum nhum
+t bouscule bousculent hum hum
+t calme calment X hum
+t célèbre célèbrent hum nhum
+X change changent X Y
+t choisit choisissent hum X
+i chute chutent hum
+t concède concèdent hum X
+t connaît connaîssent hum X
+X continue continuent hum nhum
+t contre contrent hum X
+i court courent hum
+t fait font hum nhum
+X fatigue fatiguent Y hum
+t félicite félicitent hum hum
+t fête fêtent hum nhum
+t frappe frappent hum X
+i freine freinent hum
+t gagne gagnent hum nhum
+i galope galopent hum
+t garde gardent hum nhum
+i glisse glissent X
+t maîtrise maîtrisent hum nhum
+i marche marchent nhum
+X marque marquent hum hum
+X mène mènent hum nhum
+t met mettent hum nhum
+t observe observent hum X
+t oppose opposent hum hum
+X qualifie qualifient Y nhum
+t quitte quittent X nhum
+X ralentit ralentissent Y Z
+t ramasse ramassent hum nhum
+t réceptionne réceptionnent hum nhum
+X recommence recommencent Y Z
+t récompense récompensent hum hum
+t vainc vainquent hum hum
+i vient viennent hum
+t vise visent hum nhum
+t voit voient hum X
+t veut veulent hum nhum
+t tire tirent hum nhum
+t touche touchent X Y
+i triche trichent hum
+t trouve trouvent hum X
+t supporte supportent X Y
+t suspend suspendent hum X
