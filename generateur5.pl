@@ -477,7 +477,7 @@ relsem(cible,nager,marin).
 relsem(cible,naviguer,marin).
 relsem(agent,corsaire,attaquer).
 relsem(cible,attaquer,corsaire).
-relsem(agent,manchot,plonger).
+relsem(agent,manchot,plonger).z
 relsem(cible,naviguer,ballon).
 relsem(agent,joueur,vaincre).
 relsem(cible,vaincre,judoka).

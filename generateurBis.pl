@@ -3,55 +3,59 @@
 phrase(W) :-
   set_prolog_stack(global, limit(100 000 000 000)),
   findall(X,s(X,Y,Z),L),
-  % random_member(W,L).
-  open('liste.txt',write,OS),
-  loop_through_list(L,OS),
-  close(OS).
+  random_member(W,L).
+  % open('liste.txt',write,OS),
+  % loop_through_list(L,OS),
+  % close(OS).
 
-loop_through_list([],OS).
-loop_through_list([Head|Tail],OS) :-
-    write(OS,Head),
-    write(OS,'\n'),
-    loop_through_list(Tail,OS).
+% loop_through_list([],OS).
+% loop_through_list([Head|Tail],OS) :-
+%     write(OS,Head),
+%     write(OS,'\n'),
+%     loop_through_list(Tail,OS).
+
+queue(Tail,[Head|Tail]).
 
 s(L,P,Q):-
-  sn(SN,P,X,N,G,H,B),
+  sn(SN,P,X,N,G,H,X),
   sv(SV,X,Q,N,H,Ho),
   \+nth0(Z, SV, SN),
   append(SN,SV,L).
-  % ,atomic_list_concat(L,' ',A).
+  % atomic_list_concat(L,' ',A).
 
-sn([DET,NOM],P,Q,N,G,H,B):-
-  det(DET,P,X,N,G,B),
+sn([DET,NOM],P,Q,N,G,H,W):-
+  det(DET,P,X,N,G,W),
   n(NOM,X,Y,N,G,H).
 
-sn([NP],P,Q,N,G,H):-
-  np(NP,P,X,N,G,H).
+% sn([NP],P,Q,N,G,H):-
+%   np(NP,P,X,N,G,H).
 
 % sv([VI],P,Q,N,H,Ho):-vi(VI,P,Q,N,H).
 
 sv(L,P,Q,N,H,Ho):-
   vt(VT,P,X,N,H,Ho),
   sn(SN,X,Q,No,G,Ho,Q),
+  queue(Z,SN),
+  relsem(C,SV,Z),
   append([VT],SN,L).
 
-det(la,P,Q,sing,fem,NQ).
-det(le,P,Q,sing,masc,NQ).
-det(les,P,Q,plur,_,NQ).
-det(tout,P,Q,sing,masc,Qu).
-det(toute,P,Q,sing,fem,Qu).
-det(tous,P,Q,plur,masc,Qu).
-det(toutes,P,Q,plur,fem,Qu).
-det(chaque,P,Q,sing,masc,Qu).
-det(chaque,P,Q,sing,fem,Qu).
-det(quelque,P,Q,sing,masc,Qu).
-det(quelques,P,Q,plur,masc,Qu).
-det(quelque,P,Q,sing,fem,Qu).
-det(quelques,P,Q,plur,fem,Qu).
-det(certain,P,Q,sing,masc,Qu).
-det(certaine,P,Q,sing,fem,Qu).
-det(certains,P,Q,plur,masc,Qu).
-det(certaines,P,Q,plur,fem,Qu).
+det(la,P,Q,sing,fem,W).
+det(le,P,Q,sing,masc,W).
+det(les,P,Q,plur,_,W).
+det(tout,P,Q,sing,masc,_).
+det(toute,P,Q,sing,fem,_).
+det(tous,P,Q,plur,masc,_).
+det(toutes,P,Q,plur,fem,_).
+det(chaque,P,Q,sing,masc,_).
+det(chaque,P,Q,sing,fem,_).
+det(quelque,P,Q,sing,masc,_).
+det(quelques,P,Q,plur,masc,_).
+det(quelque,P,Q,sing,fem,_).
+det(quelques,P,Q,plur,fem,_).
+det(certain,P,Q,sing,masc,_).
+det(certaine,P,Q,sing,fem,_).
+det(certains,P,Q,plur,masc,_).
+det(certaines,P,Q,plur,fem,_).
 
 vt(abandonne,P,Q,sing,hum,X).
 vt(abandonnent,P,Q,plur,hum,X).
@@ -145,6 +149,103 @@ vt(tire,P,Q,sing,hum,nhum).
 vt(tirent,P,Q,plur,hum,nhum).
 vt(touche,P,Q,sing,hum,Y).
 vt(touchent,P,Q,plur,hum,Y).
+
+relsem(A,kayac,naviguer).
+relsem(C,courir,marathonien).
+relsem(C,nager,maitre-nageur).
+relsem(A,tricheur,tricher).
+relsem(C,tricher,concurrent).
+relsem(C,tricher,sportive).
+relsem(A,skieur,glisser).
+relsem(A,patineur,glisser).
+relsem(A,navigateur,naviguer).
+relsem(C,battre,concurrent).
+relsem(A,sportif,sauter).
+relsem(C,tricher,sportif).
+relsem(A,sportif,abandonner).
+relsem(C,tricher,tricheur).
+relsem(A,sportif,courir).
+relsem(C,doper,concurrent).
+relsem(C,disputer,concurrent).
+relsem(C,courir,basketteur).
+relsem(C,disputer,sportif).
+relsem(C,doper,sportif).
+relsem(C,vaincre,concurrent).
+relsem(C,vaincre,sportif).
+relsem(C,plonger,nageur).
+relsem(C,rencontrer,sportif).
+relsem(C,battre,sportif).
+relsem(C,abandonner,sportif).
+relsem(C,glisser,patineur).
+relsem(C,glisser,skieur).
+relsem(C,naviguer,navigateur).
+relsem(A,sportif,gagner).
+relsem(C,défendre,basketteur).
+relsem(A,marathonien,courir).
+relsem(A,sportif,jouer).
+relsem(A,sportif,battre).
+relsem(A,sportif,rencontrer).
+relsem(A,concurrent,vaincre).
+relsem(A,sportif,vaincre).
+relsem(A,nageur,plonger).
+relsem(C,nager,sabre).
+relsem(A,sportif,doper).
+relsem(C,naviguer,kayac).
+relsem(A,ballon,naviguer).
+relsem(C,skier,skieur).
+relsem(A,sportif,disputer).
+relsem(C,marquer,footballer).
+relsem(A,skieur,skier).
+relsem(C,jouer,batteur).
+relsem(C,marquer,basketteur).
+relsem(A,concurrent,disputer).
+relsem(A,basketteur,courir).
+relsem(A,sportif,pratiquer).
+relsem(A,concurrent,doper).
+relsem(C,naviguer,reprise).
+relsem(C,pratiquer,sportif).
+relsem(A,sabre,nager).
+relsem(C,nager,maître-nageur).
+relsem(A,maître-nageur,nager).
+relsem(C,tirer,basketteur).
+relsem(A,footballer,marquer).
+relsem(A,footballeur,marquer).
+relsem(A,footballeur,courir).
+relsem(A,batteur,jouer).
+relsem(A,basketteur,marquer).
+relsem(A,footballeuse,marquer).
+relsem(A,footballeuse,tirer).
+relsem(A,footballeuse,jouer).
+relsem(A,sportif,lancer).
+relsem(A,sportif,perdre).
+relsem(A,sportif,nager).
+relsem(C,lancer,sportif).
+relsem(C,sauter,sportif).
+relsem(C,gagner,sportif).
+relsem(C,perdre,sportif).
+relsem(C,courir,sportif).
+relsem(A,maitre-nageur,nager).
+relsem(A,sportif,tricher).
+relsem(A,sportive,tricher).
+relsem(A,footballeur,tricher).
+relsem(C,marquer,footballeur).
+relsem(C,courir,footballeur).
+relsem(C,jouer,sportif).
+relsem(C,lancer,handballeur).
+relsem(C,courir,footballeuse).
+relsem(A,concurrent,tricher).
+relsem(A,reprise,naviguer).
+relsem(C,nager,sportif).
+relsem(C,tricher,footballeur).
+relsem(C,naviguer,ballon).
+relsem(A,concurrent,battre).
+relsem(C,perdre,club de sport).
+relsem(A,club de sport,perdre).
+relsem(C,lancer,nageur).
+relsem(C,tirer,footballeuse).
+relsem(C,jouer,footballeuse).
+relsem(C,nager,maître nageur).
+relsem(C,marquer,footballeuse).
 
 
 n(sport,P,Q,sing,masc,nhum).
