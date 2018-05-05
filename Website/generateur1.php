@@ -30,7 +30,7 @@ session_start();
         <div class="row">
           <div class="col-md-12 wow fadeIn">
             <div class="text-center text-white">
-              <h1 class="display-2 mb-2 wow fadeInDown" data-wow-delay="0.3s">Phrasonateur</h1>
+              <h1 class="display-2 mb-2 wow fadeInDown" data-wow-delay="0.3s">Phrasonator</h1>
               <a class="btn btn-danger btn-lg wow fadeInDown" data-wow-delay="0.4s" href="#"><?php echo " ".$_SESSION['Nom']." ".$_SESSION['Prenom']; ?></a>
               <a class="btn btn-primary btn-lg wow fadeInDown" data-wow-delay="0.4s" href="generateur.php">Deconnexion</a>
             </div>

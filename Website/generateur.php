@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-12 wow fadeIn">
             <div class="text-center text-white">
-              <h1 class="display-2 mb-2 wow fadeInDown" data-wow-delay="0.3s">Phrasonateur</h1>
+              <h1 class="display-2 mb-2 wow fadeInDown" data-wow-delay="0.3s">Phrasonator</h1>
               <!-- <h5 class="font-up mb-3 mt-1 font-bold wow fadeInDown" style="font-weight:bold; text-shadow: 0 0 8px #FFF, 0 -2px 12px #222, 0 -5px 15px #666;" data-wow-delay="0.4s">SNI<a href="https://goo.gl/nsVK7W">https://goo.gl/nsVK7W</a><br> -->
               <a class="btn btn-danger btn-lg wow fadeInDown" data-wow-delay="0.4s" href="connexion.php"><i class="fa fa-lock" href="connexion.php"></i> Connexion</a>
               <a class="btn btn-primary btn-lg wow fadeInDown" data-wow-delay="0.4s" href="inscription.php"><i class="fa fa-registered"></i> Inscription</a>
