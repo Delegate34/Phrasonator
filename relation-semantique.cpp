@@ -9,7 +9,6 @@
 
 using namespace std;
 
-//ce programme a un temps d'execution de pres de 14131.57s presque 4h
 int main(int argc,char** argv){
   clock_t tStart = clock();
   string id,mot,ligne,line,output;
@@ -17,9 +16,7 @@ int main(int argc,char** argv){
   ofstream lexic;
   bool found = false;
   int l,compt=0,size=0;
-  // string listeids[2149][3];
-  // vector<string,string> listeids;
-  string listeid1[2149],listeid2[2149];
+  string listeid1[3129],listeid2[3129],type[3129];
   map<string, string> listemots;
   sport.open("mots.txt",ifstream::in);
   lexic.open("generateur3.pl",ofstream::out);
@@ -28,18 +25,8 @@ int main(int argc,char** argv){
     relation.seekg (0, relation.beg);
     while(getline(relation,ligne)){
       //recuperer les ids des mots en relations
-      // if(ligne.find('|t=13|')){
-      //   agent=1;
-      // }
-      // if(ligne.find('|t=24|')){
-      //   agent=2;
-      // }
-      // if(agent==1 || agent==2){
-        // cout<<agent<<endl;
-        if(ligne.find("|t=13|")!=-1 || ligne.find("|t=24|")!=-1){
+        if(ligne.find("|t=13|")!=-1 || ligne.find("|t=14|")!=-1 || ligne.find("|t=24|")!=-1 || ligne.find("|t=26|")!=-1){
         for(int i=0;i<ligne.length();i++){
-          //   break;
-          // }
           if(found){
             compt++;
           }
@@ -53,36 +40,31 @@ int main(int argc,char** argv){
           }
           if(ligne[i] == '|' && found){
             if(listeid1[size].empty()){
-              // if(agent==1){
-                // listeids[size].push_back(ligne.substr(l,compt-1));
-              // }else{
-                listeid1[size]=ligne.substr(l,compt-1);
-              // }
+              listeid1[size]=ligne.substr(l,compt-1);
             }else if(listeid2[size].empty()){
-              // if(agent==1){
-              // listeids[size].push_back(ligne.substr(l,compt-1));
-              // }else{
                 listeid2[size]=ligne.substr(l,compt-1);
-                size++;
-                // break;
-              // }
             }
-            // agent=0;
             found = false;
             compt = 0;
-            // if(!listeids[size][2].empty()){
-            //   size++;
-            //   break;
-            // }
+            if(!listeid2[size].empty()){
+              if(ligne.find("|t=13|")!=-1){
+                type[size]="|t=13|";
+              }else if(ligne.find("|t=14|")!=-1){
+                type[size]="|t=14|";
+              }else if(ligne.find("|t=24|")!=-1){
+                type[size]="|t=24|";
+              }else if(ligne.find("|t=26|")!=-1){
+                type[size]="|t=26|";
+              }
+              size++;
+              break;
+            }
           }
         }
       }
     }
   }
-  for(int i=0;i<2149;i++){
-    std::cout << listeid1[i]<<" "<<listeid2[i] << '\n';
-  }
-  //on recupere les mots correspondant aux ids
+  //on recupere les mots correspondant aux ids precedemment recupérés
   if(sport.is_open()){
     sport.seekg (0, sport.beg);
     while(getline(sport,line)){
@@ -113,13 +95,21 @@ int main(int argc,char** argv){
     }
   }
   for(int i=0;i<2149;i++){
-    output="relsem(agent,"+listemots[listeid2[i]]+","+listemots[listeid1[i]]+").";
-    lexic<<output;
-    lexic<<"\n";
+    if(type[i].find("|t=14|")!=-1){
+      output="relsem(patient,"+listemots[listeid2[i]]+","+listemots[listeid1[i]]+").";
+      lexic<<output;
+      lexic<<"\n";
+    }else if(type[i].find("|t=13|")!=-1){
+      output="relsem(agent,"+listemots[listeid2[i]]+","+listemots[listeid1[i]]+").";
+      lexic<<output;
+      lexic<<"\n";
+    }
+    // else if(type[i].find("|t=24|")!=-1){
+    //   output="relsem(agent,"+listemots[listeid1[i]]+","+listemots[listeid2[i]]+").";
+    // }else if(type[i].find("|t=26|")!=-1){
+    //   output="relsem(patient,"+listemots[listeid1[i]]+","+listemots[listeid2[i]]+").";
+    // }
   }
-  // for (int i=0; i < sizeof(listeids); i++){
-  //   free(listeids[i]);
-  // }
   listemots.clear();
   sport.close();
   lexic.close();
